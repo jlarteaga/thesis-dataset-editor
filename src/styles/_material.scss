@@ -1,0 +1,20 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define a theme.
+$primary: mat.define-palette(mat.$indigo-palette);
+$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$theme: mat.define-dark-theme((
+		color: (
+				primary: $primary,
+				accent: $accent
+		)
+));
+
+// Include all theme styles for the components.
+@include mat.all-component-themes($theme);
+
+$background-color: map.get($theme, background, background);

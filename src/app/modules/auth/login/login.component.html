@@ -1,0 +1,30 @@
+<div class="container">
+	<mat-card class="login">
+		<mat-card-title>Login</mat-card-title>
+		<mat-card-content class="login__content">
+			<div
+				[formGroup]="loginForm"
+				class="login__form"
+			>
+				<mat-form-field appearance="standard">
+					<mat-label>Email</mat-label>
+					<input formControlName="email" matInput placeholder="Email" required type="text">
+				</mat-form-field>
+				<mat-form-field appearance="standard">
+					<mat-label>Password</mat-label>
+					<input formControlName="password" matInput placeholder="Password" required type="password">
+				</mat-form-field>
+			</div>
+			<p class="login__error-message mat-caption">{{errorMessage}}</p>
+		</mat-card-content>
+		<mat-card-actions align="end" class="login__actions">
+			<button
+				(click)="processLogin()"
+				[disabled]="loginForm.invalid || isProcessing"
+				color="accent"
+				mat-flat-button
+			>{{isProcessing ? 'Logging in...' : 'Login'}}
+			</button>
+		</mat-card-actions>
+	</mat-card>
+</div>

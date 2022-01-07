@@ -1,0 +1,82 @@
+<mat-toolbar color="primary">
+	<button
+		(click)="sidenav.toggle()"
+		*ngIf="sidenav.mode === 'over'"
+		class="sidenav-toggle"
+		mat-icon-button
+	>
+		<mat-icon *ngIf="!sidenav.opened">
+			menu
+		</mat-icon>
+		<mat-icon *ngIf="sidenav.opened">
+			close
+		</mat-icon>
+	</button>
+	<span>Dataset Editor</span>
+</mat-toolbar>
+<mat-sidenav-container>
+	<mat-sidenav
+		#sidenav
+		class="mat-elevation-z2"
+		mode="side"
+		opened
+	>
+		<a
+			(click)="processSidenavClick()"
+			class="menu-button"
+			mat-button
+			routerLink="/home"
+			routerLinkActive="menu-button--active"
+		>
+			<span>Home</span>
+		</a>
+		<mat-divider></mat-divider>
+		<a
+			(click)="processSidenavClick()"
+			class="menu-button"
+			mat-button
+			routerLink="/questions"
+			routerLinkActive="menu-button--active"
+		>
+			<span>Questions</span>
+		</a>
+		<a
+			(click)="processSidenavClick()"
+			class="menu-button"
+			mat-button
+			routerLink="/student-answers"
+			routerLinkActive="menu-button--active"
+		>
+			<span>Student Answers</span>
+		</a>
+		<a
+			(click)="processSidenavClick()"
+			class="menu-button"
+			mat-button
+			routerLink="/translations"
+			routerLinkActive="menu-button--active"
+		>
+			<span>Translations</span>
+		</a>
+		<mat-divider></mat-divider>
+		<button
+			class="menu-button"
+			mat-button
+			(click)="logoutSwal.fire()"
+		>
+			<span>Logout</span>
+		</button>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<div [class.content--single]="sidenav.mode === 'over'" class="content mat-elevation-z2">
+			<router-outlet></router-outlet>
+		</div>
+	</mat-sidenav-content>
+	<swal
+		#logoutSwal
+		titleText="Are you sure you want to logout?"
+		icon="question"
+		[showCancelButton]="true"
+		(confirm)="logout()"
+	></swal>
+</mat-sidenav-container>
