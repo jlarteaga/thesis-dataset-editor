@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 		this.authService.login(email, password)
 			.subscribe(() => {
 				this.isProcessing = false;
-				this.router.navigate(['/questions']);
+				this.router.navigate(['/home']);
 				this.loginForm.enable();
 			}, (errorMessage) => {
 				this.isProcessing = false;

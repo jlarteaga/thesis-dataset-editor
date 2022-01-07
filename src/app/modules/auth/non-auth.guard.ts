@@ -22,7 +22,7 @@ export class NonAuthGuard implements CanActivate {
 				if (!isAuthorized) {
 					return true;
 				}
-				return this.router.createUrlTree(['/questions']);
+				return this.router.createUrlTree(['/home']);
 			})
 		);
 	}

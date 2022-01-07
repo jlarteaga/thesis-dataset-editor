@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 
-import { QuestionsRoutingModule } from './questions-routing.module';
+import { StudentAnswersRoutingModule } from './student-answers-routing.module';
 
 @NgModule({
 	declarations: [
@@ -10,7 +10,7 @@ import { QuestionsRoutingModule } from './questions-routing.module';
 	],
 	imports: [
 		CommonModule,
-		QuestionsRoutingModule
+		StudentAnswersRoutingModule
 	]
 })
-export class QuestionsModule {}
+export class StudentAnswersModule {}

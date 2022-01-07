@@ -1,0 +1,43 @@
+mat-sidenav {
+	width: 17em;
+	margin: 1rem;
+	padding: 1rem;
+	border-right: none;
+	border-radius: 0.7rem;
+	text-align: center;
+}
+
+.content {
+	height: calc(100vh - 7.5rem);
+	margin: 1rem;
+	margin-left: 2rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.7rem;
+
+	&.content--single {
+		margin-left: 1rem;
+	}
+}
+
+mat-divider {
+	margin: 0.5rem 0;
+}
+
+.menu-button {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+
+	& + & {
+		margin-top: 0.5rem;
+	}
+
+	&.menu-button--active {
+		background-color: rgba(230, 230, 230, 0.5);
+	}
+}
+
+.sidenav-toggle {
+	margin-right: 1rem;
+}
