@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 @use 'sass:map';
-@use 'styles/material';
+@use 'material';
+@use 'constants';
 
 html, body {
 	height: 100%;
-	background-color: map.get(material.$theme, background, background);
+	background-color: var(--default-background-color);
 }
 
 body {

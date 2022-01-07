@@ -1,6 +1,3 @@
-@use 'sass:map';
-@use 'material' as mat;
-
 mat-sidenav {
 	width: 17em;
 	margin: 1rem;
@@ -16,7 +13,7 @@ mat-sidenav {
 	margin-left: 2rem;
 	padding: 0.5rem 1rem;
 	border-radius: 0.7rem;
-	background-color: map.get(mat.$theme, background, dialog);
+	background-color: var(--dialog-background-color);
 
 	&.content--single {
 		margin-left: 1rem;

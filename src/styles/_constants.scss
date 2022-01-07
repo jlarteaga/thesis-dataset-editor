@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use 'material';
+
+$dialog-background-color: map.get(material.$theme, background, dialog);
+$default-background-color: map.get(material.$theme, background, background);
+
+:root {
+	--dialog-background-color: #{$dialog-background-color};
+	--default-background-color: #{$default-background-color};
+}
