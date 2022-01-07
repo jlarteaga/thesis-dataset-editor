@@ -58,10 +58,25 @@
 		>
 			<span>Translations</span>
 		</a>
+		<mat-divider></mat-divider>
+		<button
+			class="menu-button"
+			mat-button
+			(click)="logoutSwal.fire()"
+		>
+			<span>Logout</span>
+		</button>
 	</mat-sidenav>
 	<mat-sidenav-content>
 		<div [class.content--single]="sidenav.mode === 'over'" class="content mat-elevation-z2">
 			<router-outlet></router-outlet>
 		</div>
 	</mat-sidenav-content>
+	<swal
+		#logoutSwal
+		titleText="Are you sure you want to logout?"
+		icon="question"
+		[showCancelButton]="true"
+		(confirm)="logout()"
+	></swal>
 </mat-sidenav-container>

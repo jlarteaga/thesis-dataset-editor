@@ -1340,6 +1340,13 @@
     "@angular-devkit/schematics" "13.1.2"
     jsonc-parser "3.0.0"
 
+"@sweetalert2/ngx-sweetalert2@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/ngx-sweetalert2/-/ngx-sweetalert2-10.0.0.tgz#b04f41305e28c1ed150dffd3781b1dcff214ced3"
+  integrity sha512-PyqrlgWioN+mVd9FtZDM0cMKMV7jfD1T5Klic0F+znQN0OZypYsx5F4KRh+P+eDr+eLAR4m2LOgS5CpAgdlWEQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -5794,6 +5801,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+sweetalert2@^11.3.3:
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.3.3.tgz#92ca0408380de8f29180788ce7ed5d5faf799cea"
+  integrity sha512-10Keqbmjng/+XpkpSOQ6dttpztl7XNohjnpC6bX6XFgm0WpRXM81YE0wmonGYOP6uyzd76vpfnZS04PdVvO31Q==
 
 symbol-observable@4.0.0:
   version "4.0.0"

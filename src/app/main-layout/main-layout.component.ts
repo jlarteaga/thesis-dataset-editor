@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../modules/auth/auth.service';
 
 @Component({
 	selector: 'app-main-layout',
@@ -14,7 +15,8 @@ export class MainLayoutComponent implements AfterViewInit, OnDestroy {
 	subscriptions: Subscription[] = [];
 
 	constructor(
-		private observer: BreakpointObserver
+		private observer: BreakpointObserver,
+		private authService: AuthService
 	) {
 	}
 
@@ -42,5 +44,9 @@ export class MainLayoutComponent implements AfterViewInit, OnDestroy {
 		if (this.sidenav.mode === 'over') {
 			this.sidenav.close();
 		}
+	}
+
+	logout() {
+		this.authService.logout();
 	}
 }

@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,7 +29,8 @@ import { AuthModule } from './modules/auth/auth.module';
 		MatIconModule,
 		MatSidenavModule,
 		MatButtonModule,
-		MatDividerModule
+		MatDividerModule,
+		SweetAlert2Module.forRoot()
 	],
 	providers: [],
 	bootstrap: [AppComponent]
