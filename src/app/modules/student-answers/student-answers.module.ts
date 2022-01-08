@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { NgrxFeatures } from '../../utils/ngrx-features';
 import { HomeComponent } from './components/home/home.component';
-import { reducers } from './reducers';
 
 import { StudentAnswersRoutingModule } from './student-answers-routing.module';
 
@@ -13,7 +10,6 @@ import { StudentAnswersRoutingModule } from './student-answers-routing.module';
 	],
 	imports: [
 		CommonModule,
-		StoreModule.forFeature(NgrxFeatures.StudentAnswer, reducers, {}),
 		StudentAnswersRoutingModule
 	]
 })

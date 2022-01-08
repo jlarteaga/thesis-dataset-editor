@@ -21,11 +21,13 @@ const routes: Routes = [
 			},
 			{
 				path: 'questions',
-				loadChildren: () => import('./modules/questions/questions.module').then(m => m.QuestionsModule)
+				redirectTo: '/home'
+				// loadChildren: () => import('./modules/questions/questions.module').then(m => m.QuestionsModule)
 			},
 			{
 				path: 'student-answers',
-				loadChildren: () => import('./modules/student-answers/student-answers.module').then(m => m.StudentAnswersModule)
+				redirectTo: '/home'
+				// loadChildren: () => import('./modules/student-answers/student-answers.module').then(m => m.StudentAnswersModule)
 			},
 			{
 				path: 'translations',

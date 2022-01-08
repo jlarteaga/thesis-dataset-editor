@@ -12,11 +12,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppEffects } from './app.effects';
 import { HomeComponent } from './home/home.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AuthModule } from './modules/auth/auth.module';
-import { metaReducers, reducers } from './reducers';
+import { QuestionEffects } from './state/effects/question.effects';
+import { metaReducers, reducers } from './state/reducers';
 
 @NgModule({
 	declarations: [
@@ -38,7 +38,7 @@ import { metaReducers, reducers } from './reducers';
 		StoreModule.forRoot(reducers, {
 			metaReducers
 		}),
-		EffectsModule.forRoot([AppEffects])
+		EffectsModule.forRoot([QuestionEffects])
 	],
 	providers: [],
 	bootstrap: [AppComponent]
