@@ -9,15 +9,10 @@ import { GetAllStudentAnswerDTO } from '../../../../student-answers/dtos/get-all
 import { StudentAnswer } from '../../../../student-answers/models/student-answer';
 import { StudentAnswersService } from '../../../../student-answers/services/student-answers.service';
 
-interface TestTranslationNode {
-	type: 'test';
-	element: number;
-	children: QuestionTranslationNode[];
-}
-
 interface QuestionTranslationNode {
 	type: 'question';
-	number: number;
+	testNumber: number;
+	questionNumber: number;
 	label: string;
 	element: Partial<Record<SupportedLanguage, Question>>;
 	children: StudentAnswerTranslationNode[];
@@ -30,7 +25,7 @@ interface StudentAnswerTranslationNode {
 	element: Partial<Record<SupportedLanguage, StudentAnswer>>;
 }
 
-type TranslationNode = TestTranslationNode | QuestionTranslationNode | StudentAnswerTranslationNode;
+type TranslationNode = QuestionTranslationNode | StudentAnswerTranslationNode;
 
 export interface TranslationFlatNode {
 	expandable: boolean;
@@ -44,28 +39,19 @@ export interface TranslationFlatNode {
 
 const transformer = (node: TranslationNode, level: number): TranslationFlatNode => {
 	const isDynamic = node.type === 'question';
-	const expandable = isDynamic ||
-		(node.type !== 'student-answer' && !!node.children && node.children.length > 0);
-	const name = node.type === 'test'
-		? `Test ${node.element}`
-		: (
-			node.type === 'question'
-				? `Question ${node.number}`
-				: `Answer ${node.index + 1}`
-		);
+	const expandable = isDynamic || (node.type !== 'student-answer');
+	const name = node.type === 'question'
+		? `Question ${node.label}`
+		: `Answer ${node.index + 1}`;
 	return {
 		isDynamic,
 		expandable,
 		name,
 		level,
 		isLoading: false,
-		url: node.type === 'test'
-			? undefined
-			: (
-				node.type === 'question'
-					? `/translations/questions/${node.label}`
-					: `/translations/questions/${node.questionLabel}/student-answers/${node.index}`
-			),
+		url: node.type === 'question'
+			? `/translations/questions/${node.label}`
+			: `/translations/questions/${node.questionLabel}/student-answers/${node.index}`,
 		_origin: node
 	};
 };
@@ -98,14 +84,7 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 			transformer,
 			node => node.level,
 			node => node.expandable,
-			node => {
-				switch (node.type) {
-					case 'test':
-						return node.children;
-					default:
-						return null;
-				}
-			}
+			() => null
 		);
 		this.refreshData();
 	}
@@ -162,46 +141,29 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 		this.questionsService.getAll().pipe(
 			map(getAllQuestionDTOs => getAllQuestionDTOs.map(getAllQuestionDTO => Question.fromDto(getAllQuestionDTO))),
 			map(questions => {
-				const testMap = new Map<number, {
-					testNumber: number,
-					questions: Map<number, Partial<Record<SupportedLanguage, Question>>>
-				}>();
+				const questionsMap = new Map<string, Partial<Record<SupportedLanguage, Question>>>();
 				questions.forEach(question => {
-					const [testNumber, questionNumber] = Question.getTestAndQuestionNumber(question.label);
-					if (!testMap.has(testNumber)) {
-						testMap.set(testNumber, {
-							testNumber,
-							questions: new Map()
-						});
+					if (!questionsMap.has(question.label)) {
+						questionsMap.set(question.label, {});
 					}
 					// @ts-ignore
-					const questionsMap = testMap.get(testNumber).questions;
-					if (!questionsMap.has(questionNumber)) {
-						questionsMap.set(questionNumber, {});
-					}
-					// @ts-ignore
-					questionsMap.get(questionNumber)[question.lang] = question;
+					questionsMap.get(question.label)[question.lang] = question;
 				});
-				const nodes: TestTranslationNode[] = [];
-				testMap.forEach(({ questions, testNumber }) => {
-					const node: TestTranslationNode = {
-						type: 'test',
-						element: testNumber,
+				const nodes: QuestionTranslationNode[] = [];
+				questionsMap.forEach((questionPair) => {
+					// @ts-ignore
+					const referenceQuestion: Question = questionPair.es || questionPair.en;
+					const [testNumber, questionNumber] = Question.getTestAndQuestionNumber(referenceQuestion.label);
+					nodes.push({
+						type: 'question',
+						testNumber,
+						questionNumber,
+						label: referenceQuestion.label,
+						element: questionPair,
 						children: []
-					};
-					questions.forEach((questionPair, questionNumber) => {
-						node.children.push({
-							type: 'question',
-							label: questionPair?.en?.label || questionPair?.es?.label || `${testNumber}.${questionNumber}`,
-							number: questionNumber,
-							element: questionPair,
-							children: []
-						});
 					});
-					node.children.sort((question1, question2) => question1.number - question2.number);
-					nodes.push(node);
 				});
-				nodes.sort((node1, node2) => node1.element - node2.element);
+				nodes.sort((node1, node2) => (node1.testNumber - node2.testNumber) || (node1.questionNumber - node2.questionNumber));
 				return nodes;
 			})
 		).subscribe((nodes: TranslationNode[]) => {
@@ -232,14 +194,10 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 				node.isLoading = true;
 				this.getStudentAnswersTranslationNodes(parentNode.label, parentNode.element.es?.uuid, parentNode.element.en?.uuid)
 					.subscribe(translationNodes => {
-						const [testNumber, questionNumber] = Question.getTestAndQuestionNumber(parentNode.label);
-						// @ts-ignore
-						const testNode: TestTranslationNode | undefined = this.data.find(node => node.type === 'test' && node.element === testNumber);
-						if (testNode) {
-							const questionNode = testNode.children.find(node => node.type === 'question' && node.number === questionNumber);
-							if (questionNode) {
-								questionNode.children = translationNodes;
-							}
+						const [, questionNumber] = Question.getTestAndQuestionNumber(parentNode.label);
+						const questionNode = this.data.find(node => node.type === 'question' && node.questionNumber === questionNumber);
+						if (questionNode && questionNode.type === 'question') {
+							questionNode.children = translationNodes;
 						}
 						const flattenedNodes = this._treeFlattener.flattenNodes(translationNodes);
 						flattenedNodes.forEach(flattenedNode => {
