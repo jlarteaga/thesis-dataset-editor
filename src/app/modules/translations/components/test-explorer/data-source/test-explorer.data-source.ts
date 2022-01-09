@@ -1,31 +1,14 @@
 import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener } from '@angular/material/tree';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, map, merge, Observable, Subscription, zip } from 'rxjs';
-import { SupportedLanguage } from '../../../../../utils/global-types';
 import { Question } from '../../../../questions/models/question';
-import { QuestionsService } from '../../../../questions/services/questions.service';
 import { GetAllStudentAnswerDTO } from '../../../../student-answers/dtos/get-all-student-answer.dto';
 import { StudentAnswer } from '../../../../student-answers/models/student-answer';
 import { StudentAnswersService } from '../../../../student-answers/services/student-answers.service';
-
-interface QuestionTranslationNode {
-	type: 'question';
-	testNumber: number;
-	questionNumber: number;
-	label: string;
-	element: Partial<Record<SupportedLanguage, Question>>;
-	children: StudentAnswerTranslationNode[];
-}
-
-interface StudentAnswerTranslationNode {
-	type: 'student-answer';
-	index: number;
-	questionLabel: string;
-	element: Partial<Record<SupportedLanguage, StudentAnswer>>;
-}
-
-type TranslationNode = QuestionTranslationNode | StudentAnswerTranslationNode;
+import { selectTranslationNodes } from '../../../state/selectors/translation-nodes';
+import { StudentAnswerTranslationNode, TranslationNode } from '../../../state/translations.state';
 
 export interface TranslationFlatNode {
 	expandable: boolean;
@@ -77,7 +60,7 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 
 	constructor(
 		private _treeControl: FlatTreeControl<TranslationFlatNode>,
-		private questionsService: QuestionsService,
+		private store: Store,
 		private studentAnswersService: StudentAnswersService
 	) {
 		this._treeFlattener = new MatTreeFlattener(
@@ -86,7 +69,11 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 			node => node.expandable,
 			() => null
 		);
-		this.refreshData();
+		this.subscriptions.push(
+			this.store.select(selectTranslationNodes).subscribe(translationNodes => {
+				this.data = translationNodes;
+			})
+		);
 	}
 
 	connect(collectionViewer: CollectionViewer): Observable<TranslationFlatNode[]> {
@@ -135,41 +122,6 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 				return children;
 			})
 		);
-	}
-
-	private refreshData() {
-		this.questionsService.getAll().pipe(
-			map(getAllQuestionDTOs => getAllQuestionDTOs.map(getAllQuestionDTO => Question.fromDto(getAllQuestionDTO))),
-			map(questions => {
-				const questionsMap = new Map<string, Partial<Record<SupportedLanguage, Question>>>();
-				questions.forEach(question => {
-					if (!questionsMap.has(question.label)) {
-						questionsMap.set(question.label, {});
-					}
-					// @ts-ignore
-					questionsMap.get(question.label)[question.lang] = question;
-				});
-				const nodes: QuestionTranslationNode[] = [];
-				questionsMap.forEach((questionPair) => {
-					// @ts-ignore
-					const referenceQuestion: Question = questionPair.es || questionPair.en;
-					const [testNumber, questionNumber] = Question.getTestAndQuestionNumber(referenceQuestion.label);
-					nodes.push({
-						type: 'question',
-						testNumber,
-						questionNumber,
-						label: referenceQuestion.label,
-						element: questionPair,
-						children: []
-					});
-				});
-				nodes.sort((node1, node2) => (node1.testNumber - node2.testNumber) || (node1.questionNumber - node2.questionNumber));
-				return nodes;
-			})
-		).subscribe((nodes: TranslationNode[]) => {
-			this.data = nodes;
-		});
-
 	}
 
 	private handleTreeControl(change: SelectionChange<TranslationFlatNode>): void {

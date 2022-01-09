@@ -6,6 +6,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +32,9 @@ import { AuthModule } from './modules/auth/auth.module';
 		MatSidenavModule,
 		MatButtonModule,
 		MatDividerModule,
-		SweetAlert2Module.forRoot()
+		SweetAlert2Module.forRoot(),
+		StoreModule.forRoot({}, {}),
+		EffectsModule.forRoot([])
 	],
 	providers: [],
 	bootstrap: [AppComponent]

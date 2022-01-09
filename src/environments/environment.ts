@@ -5,8 +5,7 @@
 export const environment = {
 	production: false,
 	datasetManager: {
-		// url: 'http://localhost:3000'
-		url: 'https://dataset-manager.jlarteaga.dev'
+		url: 'http://localhost:3000'
 	}
 };
 

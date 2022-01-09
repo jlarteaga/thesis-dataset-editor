@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="areTranslationNodesLoaded$ | async" class="container">
 	<div class="left-panel">
 		<app-test-explorer>
 		</app-test-explorer>
@@ -12,3 +12,4 @@
 		</mat-card>
 	</div>
 </div>
+<mat-progress-bar *ngIf="!(areTranslationNodesLoaded$ | async)"></mat-progress-bar>

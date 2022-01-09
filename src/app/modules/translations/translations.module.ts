@@ -6,10 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTreeModule } from '@angular/material/tree';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { HomeComponent } from './components/home/home.component';
 import { TestExplorerComponent } from './components/test-explorer/test-explorer.component';
 import { TranslateQuestionComponent } from './components/translate-question/translate-question.component';
 import { TranslateStudentAnswerComponent } from './components/translate-student-answer/translate-student-answer.component';
+import { TranslationNodesEffects } from './state/effects/translation-nodes.effects';
+import { translationsFeature } from './state/translations.feature';
 
 import { TranslationsRoutingModule } from './translations-routing.module';
 
@@ -28,7 +32,9 @@ import { TranslationsRoutingModule } from './translations-routing.module';
 		MatButtonModule,
 		MatProgressBarModule,
 		MatListModule,
-		MatCardModule
+		MatCardModule,
+		StoreModule.forFeature(translationsFeature),
+		EffectsModule.forFeature([TranslationNodesEffects])
 	]
 })
 export class TranslationsModule {}
