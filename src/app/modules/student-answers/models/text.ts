@@ -1,6 +1,8 @@
+import { SupportedLanguage } from '../../../utils/global-types';
+
 export interface Text {
 	uuid: string;
-	lang: string;
+	lang: SupportedLanguage;
 	raw: string;
 	sent?: string;
 	processed?: string;

@@ -1,17 +1,8 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { State } from '../../../../state/reducers';
-import { selectTranslationNodes, TranslationNode } from '../../../../state/selectors/translations/translation-tree.selectors';
-
-/** Flat node with expandable and level information */
-interface TranslationFlatNode {
-	expandable: boolean;
-	name: string;
-	level: number;
-}
+import { QuestionsService } from '../../../questions/services/questions.service';
+import { StudentAnswersService } from '../../../student-answers/services/student-answers.service';
+import { TestExplorerDataSource, TranslationFlatNode } from './data-source/test-explorer.data-source';
 
 @Component({
 	selector: 'app-test-explorer',
@@ -20,45 +11,31 @@ interface TranslationFlatNode {
 })
 export class TestExplorerComponent implements OnInit, OnDestroy {
 
+	dataSource: TestExplorerDataSource;
 	treeControl = new FlatTreeControl<TranslationFlatNode>(
-		node => node.level,
-		node => node.expandable
-	);
-	translationNodes$: Observable<TranslationNode[]>;
-	dataSource = new MatTreeFlatDataSource(this.treeControl, TestExplorerComponent.treeFlattener);
-	subscriptions: Subscription[] = [];
-
-	static _transformer = (node: TranslationNode, level: number) => {
-		return {
-			expandable: !!node.children && node.children.length > 0,
-			name: node.name,
-			level: level
-		};
-	};
-
-	static treeFlattener = new MatTreeFlattener(
-		TestExplorerComponent._transformer,
-		node => node.level,
-		node => node.expandable,
-		node => node.children
+		dataNode => dataNode.level,
+		dataNode => dataNode.expandable
 	);
 
 	constructor(
-		private store: Store<State>
+		private questionsService: QuestionsService,
+		private studentAnswersService: StudentAnswersService
 	) {
-		this.translationNodes$ = store.select(selectTranslationNodes);
-		this.subscriptions.push(this.translationNodes$.subscribe(translationNodes => {
-			this.dataSource.data = translationNodes;
-		}));
-	}
+		this.dataSource = new TestExplorerDataSource(
+			this.treeControl,
+			questionsService,
+			studentAnswersService
+		);
+	};
 
 	ngOnInit(): void {
 	}
 
 	ngOnDestroy(): void {
-		this.subscriptions.forEach(subscription => subscription.unsubscribe());
 	}
 
-	hasChild = (_: number, node: TranslationFlatNode) => node.expandable;
+	hasChild(_: number, node: TranslationFlatNode) {
+		return node.expandable;
+	}
 
 }

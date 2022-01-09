@@ -1,5 +1,7 @@
 import { Text } from '../../student-answers/models/text';
 
+export const LABEL_REGEX = /^(\d+)\.(\d+)/;
+
 export interface BaseQuestionDTO {
 	uuid: string;
 	rawStatement: string;
@@ -7,7 +9,6 @@ export interface BaseQuestionDTO {
 	lang: string;
 	label: string;
 	answer: Text;
-
 }
 
 export interface GetAllQuestionDTO extends BaseQuestionDTO {
@@ -23,7 +24,16 @@ export class Question {
 	label: string;
 	answer: Text;
 
-	static fromDto({ uuid, lang, answer, label, sentStatement, rawStatement }: GetAllQuestionDTO): Question {
+	static fromDto(
+		{
+			uuid,
+			lang,
+			answer,
+			label,
+			sentStatement,
+			rawStatement
+		}: GetAllQuestionDTO
+	): Question {
 		return new Question({
 			uuid,
 			lang,
@@ -32,6 +42,14 @@ export class Question {
 			sentStatement,
 			rawStatement
 		});
+	}
+
+	static getTestAndQuestionNumber(label: string): [number, number] {
+		const results = LABEL_REGEX.exec(label);
+		if (results === null) {
+			return [NaN, NaN];
+		}
+		return [parseInt(results[1], 10), parseInt(results[2], 10)];
 	}
 
 	constructor(question: Question) {

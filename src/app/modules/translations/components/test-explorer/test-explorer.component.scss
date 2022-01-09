@@ -1,26 +1,25 @@
-.example-tree-invisible {
-	display: none;
+$toggle-button-size: 1.2rem;
+.toggle-button {
+
+	width: $toggle-button-size;
+	height: $toggle-button-size;
+	line-height: $toggle-button-size;
+
+	.mat-icon {
+		width: $toggle-button-size;
+		height: $toggle-button-size;
+		line-height: $toggle-button-size;
+		font-size: $toggle-button-size;
+	}
+
+	.mat-button-ripple {
+		width: inherit;
+		height: inherit;
+		line-height: inherit;
+		font-size: inherit;
+	}
 }
 
-.example-tree ul,
-.example-tree li {
-	margin-top: 0;
-	margin-bottom: 0;
-	list-style-type: none;
-}
-
-/*
- * This padding sets alignment of the nested nodes.
- */
-.example-tree .mat-nested-tree-node div[role=group] {
-	padding-left: 40px;
-}
-
-/*
- * Padding for leaf nodes.
- * Leaf nodes need to have padding so as to align with other non-leaf nodes
- * under the same parent.
- */
-.example-tree div[role=group] > .mat-tree-node {
-	padding-left: 40px;
+mat-progress-bar {
+	margin-left: 2rem;
 }

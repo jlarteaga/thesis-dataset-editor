@@ -20,8 +20,6 @@
 		"@angular/platform-browser": "~13.1.0",
 		"@angular/platform-browser-dynamic": "~13.1.0",
 		"@angular/router": "~13.1.0",
-		"@ngrx/effects": "^13.0.2",
-		"@ngrx/store": "^13.0.2",
 		"@sweetalert2/ngx-sweetalert2": "^10.0.0",
 		"rxjs": "~7.4.0",
 		"sweetalert2": "^11.3.3",
