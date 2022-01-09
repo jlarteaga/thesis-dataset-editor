@@ -10,11 +10,11 @@ const routes: Routes = [
 		component: HomeComponent,
 		children: [
 			{
-				path: 'questions/:label',
+				path: 'questions/:questionLabel',
 				component: TranslateQuestionComponent
 			},
 			{
-				path: 'questions/:label/student-answers/:number',
+				path: 'questions/:questionLabel/student-answers/:studentAnswerIndex',
 				component: TranslateStudentAnswerComponent
 			}
 		]

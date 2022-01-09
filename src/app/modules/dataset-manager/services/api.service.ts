@@ -29,6 +29,16 @@ export class ApiService {
 		);
 	}
 
+	patch<Body, T>(path: string, entity: Body) {
+		return this.httpClient.patch<T>(
+			`${this.datasetManagerUrl}${path.startsWith('/') ? '' : '/'}${path}`,
+			entity,
+			{
+				headers: this.headers
+			}
+		);
+	}
+
 	private setupAuthenticationSubscription() {
 		this.authService.user.pipe(
 			map(user => user?.token || null)

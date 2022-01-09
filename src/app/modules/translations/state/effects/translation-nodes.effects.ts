@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, Observable } from 'rxjs';
+import { exhaustMap, map, Observable, zip } from 'rxjs';
 import { SupportedLanguage } from '../../../../utils/global-types';
 import { Question } from '../../../questions/models/question';
 import { QuestionsService } from '../../../questions/services/questions.service';
+import { GetAllStudentAnswerDTO } from '../../../student-answers/dtos/get-all-student-answer.dto';
+import { StudentAnswer } from '../../../student-answers/models/student-answer';
+import { StudentAnswersService } from '../../../student-answers/services/student-answers.service';
 import { TranslationNodesActions } from '../actions';
-import { QuestionTranslationNode, TranslationNode } from '../translations.state';
+import { QuestionTranslationNode, StudentAnswerTranslationNode } from '../translations.state';
 
 @Injectable()
 export class TranslationNodesEffects {
 
-	loadTranslations$ = createEffect(() =>
+	loadQuestionNodes$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(TranslationNodesActions.loadTranslationNodes),
+			ofType(TranslationNodesActions.loadQuestionTranslationNodes),
 			exhaustMap(() =>
-				this.retrieveTranslationNodes().pipe(
-					map(translationNodes => TranslationNodesActions.setTranslationNodes({
+				this.retrieveQuestionTranslationNodes().pipe(
+					map(translationNodes => TranslationNodesActions.setQuestionTranslationNodes({
 						translationNodes
 					}))
 				)
@@ -23,19 +26,47 @@ export class TranslationNodesEffects {
 		)
 	);
 
-	setTranslationNodes$ = createEffect(() =>
+	setQuestionNodes$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(TranslationNodesActions.setTranslationNodes),
-			map(() => TranslationNodesActions.translationNodesLoaded())
+			ofType(TranslationNodesActions.setQuestionTranslationNodes),
+			map(() => {
+				return TranslationNodesActions.questionTranslationNodesLoaded();
+			})
+		));
+
+	loadStudentAnswerNodes$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(TranslationNodesActions.loadStudentAnswerNodes),
+			exhaustMap(({ parentNode }) =>
+				this.retrieveStudentAnswerTranslationNodes(parentNode).pipe(
+					map((studentAnswerTranslationNodes: StudentAnswerTranslationNode[]) => TranslationNodesActions.setStudentAnswerNodes({
+						parentNode,
+						nodes: studentAnswerTranslationNodes
+					}))
+				))
+		)
+	);
+
+	setStudentAnswerNodes$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(TranslationNodesActions.setStudentAnswerNodes),
+			map(() => TranslationNodesActions.studentAnswerNodesLoaded())
+		));
+
+	unloadStudentAnswerNodes$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(TranslationNodesActions.unloadStudentAnswerNodes),
+			map(() => TranslationNodesActions.studentAnswerNodesUnloaded())
 		));
 
 	constructor(
 		private actions$: Actions,
-		private questionsService: QuestionsService
+		private questionsService: QuestionsService,
+		private studentAnswersService: StudentAnswersService
 	) {
 	}
 
-	private retrieveTranslationNodes(): Observable<TranslationNode[]> {
+	private retrieveQuestionTranslationNodes(): Observable<QuestionTranslationNode[]> {
 		return this.questionsService.getAll().pipe(
 			map(getAllQuestionDTOs => getAllQuestionDTOs.map(getAllQuestionDTO => Question.fromDto(getAllQuestionDTO))),
 			map(questions => {
@@ -58,11 +89,36 @@ export class TranslationNodesEffects {
 						questionNumber,
 						label: referenceQuestion.label,
 						element: questionPair,
-						children: []
+						children: [],
+						isLoading: false
 					});
 				});
 				nodes.sort((node1, node2) => (node1.testNumber - node2.testNumber) || (node1.questionNumber - node2.questionNumber));
 				return nodes;
+			})
+		);
+	}
+
+	private retrieveStudentAnswerTranslationNodes(parentNode: QuestionTranslationNode): Observable<StudentAnswerTranslationNode[]> {
+		return zip(
+			this.studentAnswersService.getAllByQuestionUuid(parentNode.element?.es?.uuid),
+			this.studentAnswersService.getAllByQuestionUuid(parentNode.element?.en?.uuid)
+		).pipe(
+			map(([esStudentAnswerDtos, enStudentAnswerDtos]) => [...esStudentAnswerDtos, ...enStudentAnswerDtos]),
+			map((studentAnswerDtos: GetAllStudentAnswerDTO[]) => {
+				const children: Array<StudentAnswerTranslationNode> = [];
+				studentAnswerDtos.forEach(studentAnswerDto => {
+					if (!children[studentAnswerDto.student]) {
+						children[studentAnswerDto.student] = {
+							type: 'student-answer',
+							questionLabel: parentNode.label,
+							index: studentAnswerDto.student,
+							element: {}
+						};
+					}
+					children[studentAnswerDto.student].element[studentAnswerDto.text.lang] = StudentAnswer.fromDto(studentAnswerDto);
+				});
+				return children;
 			})
 		);
 	}

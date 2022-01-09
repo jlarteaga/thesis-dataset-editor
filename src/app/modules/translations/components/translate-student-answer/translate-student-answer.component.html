@@ -1,1 +1,8 @@
-<p>translate-student-answer works!</p>
+<div *ngIf="questionNode">
+	<p>{{questionNode.element.en?.rawStatement}}</p>
+	<p>{{questionNode.element.es?.rawStatement}}</p>
+</div>
+<div *ngIf="studentAnswerNode">
+	<p>{{studentAnswerNode.element.en?.text?.raw}}</p>
+	<p>{{studentAnswerNode.element.es?.text?.raw}}</p>
+</div>

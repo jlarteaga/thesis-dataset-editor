@@ -1,8 +1,6 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { QuestionsService } from '../../../questions/services/questions.service';
-import { StudentAnswersService } from '../../../student-answers/services/student-answers.service';
 import { TestExplorerDataSource, TranslationFlatNode } from './data-source/test-explorer.data-source';
 
 @Component({
@@ -19,14 +17,11 @@ export class TestExplorerComponent implements OnInit, OnDestroy {
 	);
 
 	constructor(
-		private store: Store,
-		private questionsService: QuestionsService,
-		private studentAnswersService: StudentAnswersService
+		private store: Store
 	) {
 		this.dataSource = new TestExplorerDataSource(
 			this.treeControl,
-			store,
-			studentAnswersService
+			store
 		);
 	};
 

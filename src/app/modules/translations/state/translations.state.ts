@@ -9,6 +9,7 @@ export interface QuestionTranslationNode {
 	label: string;
 	element: Partial<Record<SupportedLanguage, Question>>;
 	children: StudentAnswerTranslationNode[];
+	isLoading: boolean;
 }
 
 export interface StudentAnswerTranslationNode {
@@ -27,11 +28,15 @@ export enum ResourceStatus {
 export type TranslationNode = QuestionTranslationNode | StudentAnswerTranslationNode;
 
 export interface TranslationsState {
-	translationNodes: TranslationNode[];
+	translationNodes: QuestionTranslationNode[];
 	translationNodesStatus: ResourceStatus;
+	subTranslationNodesStatus: ResourceStatus;
+	updatingQuestionTranslation: boolean;
 }
 
 export const translationsInitialState: TranslationsState = {
 	translationNodes: [],
-	translationNodesStatus: ResourceStatus.NotLoaded
+	translationNodesStatus: ResourceStatus.NotLoaded,
+	subTranslationNodesStatus: ResourceStatus.NotLoaded,
+	updatingQuestionTranslation: false
 };

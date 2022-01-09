@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
@@ -33,8 +34,13 @@ import { AuthModule } from './modules/auth/auth.module';
 		MatButtonModule,
 		MatDividerModule,
 		SweetAlert2Module.forRoot(),
-		StoreModule.forRoot({}, {}),
-		EffectsModule.forRoot([])
+		StoreModule.forRoot({
+			router: routerReducer
+		}, {}),
+		EffectsModule.forRoot([]),
+		StoreRouterConnectingModule.forRoot({
+			stateKey: 'router'
+		})
 	],
 	providers: [],
 	bootstrap: [AppComponent]

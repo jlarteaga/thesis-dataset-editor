@@ -1,4 +1,4 @@
-import { BaseQuestionDTO } from '../../questions/models/question';
+import { GetBaseQuestionDTO } from '../../questions/dtos/get-base-question.dto';
 import { GetAllStudentAnswerDTO } from '../dtos/get-all-student-answer.dto';
 import { Text } from './text';
 
@@ -10,7 +10,7 @@ export class StudentAnswer {
 		me: number;
 		other: number;
 	};
-	question: BaseQuestionDTO;
+	question: GetBaseQuestionDTO;
 	text: Text;
 	student: number;
 

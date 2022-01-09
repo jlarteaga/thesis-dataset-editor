@@ -1,0 +1,53 @@
+mat-accordion {
+	width: 100%;
+}
+
+.language-panel {
+	padding: 1rem 2rem;
+}
+
+mat-form-field {
+	width: 100%;
+}
+
+textarea {
+	width: 100%;
+}
+
+.labeled-data {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	line-height: 1.8;
+
+	&__label {
+		display: inline-block;
+		width: 100%;
+		min-width: 2rem;
+		max-width: 2rem;
+		margin-right: 1rem;
+		font-weight: bold;
+	}
+
+	&__data {
+		flex-grow: 1;
+	}
+
+	& + & {
+		margin-top: 1rem;
+	}
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	& > * + * {
+		margin-left: 2rem;
+	}
+}
+
+form {
+	margin-top: 1rem;
+}

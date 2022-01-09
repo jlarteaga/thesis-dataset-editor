@@ -1,26 +1,28 @@
 .container {
 	display: flex;
-	flex-wrap: nowrap;
 	align-items: stretch;
+	flex-wrap: nowrap;
 	height: 100%;
 }
 
 .left-panel {
-	width: 20rem;
-	max-width: 100%;
 	overflow-y: scroll;
+	width: 25%;
+	min-width: 12rem;
+	max-width: 20rem;
 }
 
 .right-panel {
-	flex-grow: 1;
 	display: flex;
-	justify-content: center;
 	align-items: flex-start;
- }
+	flex-grow: 1;
+	justify-content: center;
+}
 
 .translation-element {
-	margin-top: 1rem;
-	width: 100%;
+	width: 90%;
 	max-width: 40rem;
 	min-height: 30rem;
+	margin-top: 1rem;
+	margin-left: 1rem;
 }

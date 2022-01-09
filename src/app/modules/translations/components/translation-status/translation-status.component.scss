@@ -1,0 +1,52 @@
+:host {
+	display: inline-block;
+}
+
+.status-badge {
+	display: inline-block;
+
+	border-radius: 5px;
+	line-height: 1;
+	font-weight: bold;
+
+	text-align: center;
+	vertical-align: bottom;
+
+	&--small {
+		margin-bottom: 0.21rem;
+		padding: 0.35rem;
+		font-size: 0.55rem;
+	}
+
+	&--medium {
+		margin-bottom: 0.2rem;
+		padding: 0.31rem;
+		font-size: 0.7rem;
+	}
+
+	&--big {
+		margin-bottom: 0.2rem;
+		padding: 0.3rem;
+		font-size: 0.85rem;
+	}
+
+	&--red {
+		color: #FAFAFA;
+		background-color: red;
+	}
+
+	&--yellow {
+		color: #FAFAFA;
+		background-color: #FFB80F;
+	}
+
+	&--green {
+		color: #FAFAFA;
+		background-color: forestgreen;
+	}
+
+	&--gray {
+		color: #212529;
+		background-color: #dee2e6;
+	}
+}

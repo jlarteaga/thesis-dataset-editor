@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { loadTranslationNodes } from '../../state/actions/translation-nodes.actions';
+import { loadQuestionTranslationNodes } from '../../state/actions/translation-nodes.actions';
 import { selectTranslationNodes, selectTranslationNodesStatus } from '../../state/selectors/translation-nodes';
 import { ResourceStatus, TranslationNode } from '../../state/translations.state';
 
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 		this.areTranslationNodesLoaded$ = this.translationNodesStatus$.pipe(
 			map(status => ResourceStatus.Loaded === status)
 		);
-		this.store.dispatch(loadTranslationNodes());
+		this.store.dispatch(loadQuestionTranslationNodes());
 	}
 
 	ngOnInit(): void {

@@ -1,19 +1,7 @@
 import { Text } from '../../student-answers/models/text';
+import { GetAllQuestionDTO } from '../dtos/get-all-question.dto';
 
 export const LABEL_REGEX = /^(\d+)\.(\d+)/;
-
-export interface BaseQuestionDTO {
-	uuid: string;
-	rawStatement: string;
-	sentStatement: string;
-	lang: string;
-	label: string;
-	answer: Text;
-}
-
-export interface GetAllQuestionDTO extends BaseQuestionDTO {
-
-}
 
 export class Question {
 

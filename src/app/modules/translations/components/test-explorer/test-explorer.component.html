@@ -3,7 +3,15 @@
 		<mat-list *ngIf="!node.url">
 			<mat-list-item>{{node.name}}</mat-list-item>
 		</mat-list>
-		<a *ngIf="node.url" [relativeTo]="null" [routerLink]="node.url" routerLinkActive="button-active" mat-button>{{node.name}}</a>
+		<a
+			*ngIf="node.url"
+			[relativeTo]="null"
+			[routerLinkActiveOptions]="{exact: true}"
+			[routerLink]="node.url"
+			mat-button
+			routerLinkActive="button-active"
+		>{{node.name}}</a>
+		<app-translation-status [status]="node.status" size="small"></app-translation-status>
 	</mat-tree-node>
 	<mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding="node.level">
 		<button
@@ -18,7 +26,15 @@
 		<mat-list *ngIf="!node.url">
 			<mat-list-item>{{node.name}}</mat-list-item>
 		</mat-list>
-		<a *ngIf="node.url" [relativeTo]="null" [routerLink]="node.url" routerLinkActive="button-active" mat-button>{{node.name}}</a>
+		<a
+			*ngIf="node.url"
+			[relativeTo]="null"
+			[routerLinkActiveOptions]="{exact: true}"
+			[routerLink]="node.url"
+			mat-button
+			routerLinkActive="button-active"
+		>{{node.name}}</a>
+		<app-translation-status [status]="node.status" size="small"></app-translation-status>
 		<mat-progress-bar *ngIf="node.isLoading" color="accent" mode="indeterminate"></mat-progress-bar>
 	</mat-tree-node>
 </mat-tree>
