@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: nowrap;
+	height: 100%;
+}
+
+.left-panel {
+	overflow-y: scroll;
+	width: 25%;
+	min-width: 12rem;
+	max-width: 20rem;
+}
+
+.right-panel {
+	display: flex;
+	align-items: flex-start;
+	flex-grow: 1;
+	justify-content: center;
+}
+
+.translation-element {
+	width: 90%;
+	max-width: 40rem;
+	min-height: 30rem;
+	margin-top: 1rem;
+	margin-left: 1rem;
+}

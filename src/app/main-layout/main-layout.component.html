@@ -33,18 +33,20 @@
 		<mat-divider></mat-divider>
 		<a
 			(click)="processSidenavClick()"
+			[disabled]="true"
+			[routerLink]="null"
 			class="menu-button"
 			mat-button
-			routerLink="/questions"
 			routerLinkActive="menu-button--active"
 		>
 			<span>Questions</span>
 		</a>
 		<a
 			(click)="processSidenavClick()"
+			[disabled]="true"
+			[routerLink]="null"
 			class="menu-button"
 			mat-button
-			routerLink="/student-answers"
 			routerLinkActive="menu-button--active"
 		>
 			<span>Student Answers</span>
@@ -60,9 +62,9 @@
 		</a>
 		<mat-divider></mat-divider>
 		<button
+			(click)="logoutSwal.fire()"
 			class="menu-button"
 			mat-button
-			(click)="logoutSwal.fire()"
 		>
 			<span>Logout</span>
 		</button>
@@ -74,9 +76,9 @@
 	</mat-sidenav-content>
 	<swal
 		#logoutSwal
-		titleText="Are you sure you want to logout?"
-		icon="question"
-		[showCancelButton]="true"
 		(confirm)="logout()"
+		[showCancelButton]="true"
+		icon="question"
+		titleText="Are you sure you want to logout?"
 	></swal>
 </mat-sidenav-container>

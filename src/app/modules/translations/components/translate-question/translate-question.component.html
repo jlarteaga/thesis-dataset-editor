@@ -1,0 +1,75 @@
+<div *ngIf="questionNode">
+	<h1>Question {{ questionNode.label }}
+		<app-translation-status
+			[status]="questionNode.element.es?.answer?.status" size="small"
+		></app-translation-status>
+	</h1>
+	<div class="language-panel">
+		<h2>English</h2>
+		<app-labeled-data [data]="questionNode.element.en?.rawStatement" label="Question:"></app-labeled-data>
+		<app-labeled-data [data]="questionNode.element.en?.answer?.raw" label="Answer:"></app-labeled-data>
+	</div>
+	<div class="language-panel">
+		<h2>Spanish</h2>
+		<button (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
+		<form
+			(ngSubmit)="saveChangesSwal.fire()"
+			[formGroup]="formGroup"
+		>
+			<mat-form-field appearance="fill">
+				<mat-label>Question</mat-label>
+				<textarea
+					formControlName="sentStatement"
+					lang="es"
+					matInput
+					spellcheck="true"
+					tabindex="2"
+				></textarea>
+			</mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>Answer</mat-label>
+				<textarea
+					formControlName="sentAnswer"
+					lang="es"
+					matInput
+					spellcheck="true"
+					tabindex="3"
+				></textarea>
+			</mat-form-field>
+			<div class="actions">
+				<button
+					[disabled]="formGroup.invalid || (updatingQuestionTranslation$ | async)"
+					color="primary"
+					mat-flat-button
+					tabindex="4"
+					type="submit"
+				>Update Translation
+				</button>
+				<button
+					[routerLink]="['student-answers', 0]"
+					mat-stroked-button
+					tabindex="5"
+					type="button"
+				>Translate student answers
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+<swal
+	#saveChangesSwal
+	(confirm)="updateQuestion(); savingChangesSwal.fire()"
+	[showCancelButton]="true"
+	icon="question"
+	titleText="Do you want to update this translation?"
+></swal>
+<swal
+	#savingChangesSwal
+	[allowOutsideClick]="false"
+	[icon]="(updatingQuestionTranslation$ | async) ? 'info' : 'success'"
+	[showCancelButton]="false"
+	[showCloseButton]="false"
+	[showConfirmButton]="!(updatingQuestionTranslation$ | async)"
+	[titleText]="(updatingQuestionTranslation$ | async) ? 'Saving information...' : 'Question updated!'"
+>
+</swal>

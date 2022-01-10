@@ -1,0 +1,23 @@
+mat-form-field {
+	width: 100%;
+}
+
+textarea {
+	width: 100%;
+	min-height: 6em;
+	line-height: 1.6;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	& > * + * {
+		margin-left: 2rem;
+	}
+}
+
+form {
+	margin-top: 1rem;
+}

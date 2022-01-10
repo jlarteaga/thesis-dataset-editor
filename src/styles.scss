@@ -3,6 +3,7 @@
 @use 'sass:map';
 @use 'material';
 @use 'constants';
+@use 'own-components/labeled-data';
 
 html, body {
 	height: 100%;
@@ -12,4 +13,8 @@ html, body {
 body {
 	margin: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.language-panel {
+	padding: 1rem 2rem;
 }
