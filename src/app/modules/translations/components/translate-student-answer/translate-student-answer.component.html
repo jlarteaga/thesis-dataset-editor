@@ -32,6 +32,14 @@
 			</mat-form-field>
 			<div class="actions">
 				<button
+					[disabled]="this.studentAnswerNode.index === 0"
+					[routerLink]="['..', this.studentAnswerNode.index + -1]"
+					mat-stroked-button
+					tabindex="6"
+					type="button"
+				>Previous
+				</button>
+				<button
 					[disabled]="formGroup.invalid || (updatingStudentAnswerTranslation$ | async)"
 					color="primary"
 					mat-flat-button
@@ -40,10 +48,12 @@
 				>Update Translation
 				</button>
 				<button
-					[routerLink]="['student-answers', 0]"
+					[disabled]="questionNode.children.length <= this.studentAnswerNode.index"
+					[routerLink]="['..', this.studentAnswerNode.index + 1]"
 					mat-stroked-button
 					tabindex="5"
-				>Translate student answers
+					type="button"
+				>Next
 				</button>
 			</div>
 		</form>

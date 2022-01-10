@@ -1,14 +1,4 @@
-import { GetBaseQuestionDTO } from '../../questions/dtos/get-base-question.dto';
-import { Text } from '../models/text';
+import { GetBaseStudentAnswerDto } from './get-base-student-answer.dto';
 
-export interface GetAllStudentAnswerDTO {
-	uuid: string;
-	grade: number;
-	grades: {
-		me: number;
-		other: number;
-	};
-	student: number;
-	question: GetBaseQuestionDTO;
-	text: Text;
+export interface GetAllStudentAnswerDTO extends GetBaseStudentAnswerDto {
 }

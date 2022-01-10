@@ -151,6 +151,7 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 						const flattenedChildren: TranslationFlatNode[] = this._treeFlattener.flattenNodes(possibleChange.newNode.children);
 						const flattenedParent = this._flattenedData.value[parentIndex];
 						flattenedParent.isLoading = false;
+						flattenedParent._origin = possibleChange.newNode;
 						flattenedChildren.forEach(flattenedNode => {
 							flattenedNode.level += flattenedParent.level + 1;
 						});
@@ -237,6 +238,9 @@ export class TestExplorerDataSource implements DataSource<TranslationFlatNode> {
 		const parentNode = node._origin;
 		if (parentNode.type === 'question') {
 			if (expand) {
+				if (parentNode.children.length > 0) {
+					return;
+				}
 				this.store.dispatch(
 					TranslationNodesActions.loadStudentAnswerNodes({
 						parentNode

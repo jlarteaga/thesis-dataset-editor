@@ -1,4 +1,4 @@
-import { GetBaseQuestionDTO } from '../../questions/dtos/get-base-question.dto';
+import { GetBaseStudentAnswerDto } from './get-base-student-answer.dto';
 
-export interface GetStudentAnswerDTO extends GetBaseQuestionDTO {
+export interface GetStudentAnswerDTO extends GetBaseStudentAnswerDto {
 }
