@@ -17,15 +17,26 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+## [0.1.1]
+
+### Changed
+
+- Changed behavior of SutdentAnswerTranslation and set focus to sanitize button when 'next' or 'previous' buttons are
+  clicked.
+- Improved sanitization.
+
 ## [0.1.0]
 
 ### Added
+
 - Added authentication management.
 - Added translation section to view all the translation units (question and student-answers).
 - Added component to translate questions.
 - Added component to translate student answers.
 - Added small button to sanitize some common issues.
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.0...develop
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.1...develop
+
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.0...0.1.1
 
 [0.1.0]: https://github.com/jlarteaga/thesis-dataset-editor/releases/tag/0.1.0
