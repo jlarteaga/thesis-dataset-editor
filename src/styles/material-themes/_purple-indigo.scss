@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+$_primary: mat.define-palette(mat.$purple-palette);
+$_accent: mat.define-palette(mat.$indigo-palette);
+
+$theme: mat.define-dark-theme((
+		color: (
+				primary: $_primary,
+				accent: $_accent
+		)
+));

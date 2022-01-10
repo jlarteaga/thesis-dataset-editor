@@ -1,0 +1,43 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+	<mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding="node.level">
+		<mat-list *ngIf="!node.url">
+			<mat-list-item>{{node.name}}</mat-list-item>
+		</mat-list>
+		<a
+			*ngIf="node.url"
+			[relativeTo]="null"
+			[routerLinkActiveOptions]="{exact: true}"
+			[routerLink]="node.url"
+			mat-button
+			routerLinkActive="button-active"
+			tabindex="-1"
+		>{{node.name}}</a>
+		<app-translation-status [status]="node.status" size="small"></app-translation-status>
+	</mat-tree-node>
+	<mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding="node.level">
+		<button
+			[attr.aria-label]="'Toggle ' + node.name"
+			class="toggle-button" mat-icon-button
+			matTreeNodeToggle
+			tabindex="-1"
+		>
+			<mat-icon class="mat-icon-rtl-mirror">
+				{{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+			</mat-icon>
+		</button>
+		<mat-list *ngIf="!node.url">
+			<mat-list-item>{{node.name}}</mat-list-item>
+		</mat-list>
+		<a
+			*ngIf="node.url"
+			[relativeTo]="null"
+			[routerLinkActiveOptions]="{exact: true}"
+			[routerLink]="node.url"
+			mat-button
+			routerLinkActive="button-active"
+			tabindex="-1"
+		>{{node.name}}</a>
+		<app-translation-status [status]="node.status" size="small"></app-translation-status>
+		<mat-progress-bar *ngIf="node.isLoading" color="accent" mode="indeterminate"></mat-progress-bar>
+	</mat-tree-node>
+</mat-tree>

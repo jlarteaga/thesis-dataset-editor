@@ -1,0 +1,78 @@
+<div *ngIf="questionNode && studentAnswerNode">
+	<h1>
+		Question {{questionNode.label}} [Student Answer {{studentAnswerNode.index + 1}}]
+		<app-translation-status
+			[status]="studentAnswerNode.element.es?.text?.status"
+		></app-translation-status>
+	</h1>
+	<div class="language-panel">
+	</div>
+	<div class="language-panel">
+		<h2>English</h2>
+		<app-labeled-data [data]="questionNode.element.en?.rawStatement" label="Question:"></app-labeled-data>
+		<app-labeled-data [data]="studentAnswerNode.element.en?.text?.raw" label="S-Answer:"></app-labeled-data>
+	</div>
+	<div class="language-panel">
+		<h2>Spanish</h2>
+		<app-labeled-data [data]="questionNode.element.es?.rawStatement" label="Question:"></app-labeled-data>
+		<button (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
+		<form
+			(ngSubmit)="saveChangesSwal.fire()"
+			[formGroup]="formGroup"
+		>
+			<mat-form-field appearance="fill">
+				<mat-label>Question</mat-label>
+				<textarea
+					formControlName="sent"
+					lang="es"
+					matInput
+					spellcheck="true"
+					tabindex="2"
+				></textarea>
+			</mat-form-field>
+			<div class="actions">
+				<button
+					[disabled]="this.studentAnswerNode.index === 0"
+					[routerLink]="['..', this.studentAnswerNode.index + -1]"
+					mat-stroked-button
+					tabindex="6"
+					type="button"
+				>Previous
+				</button>
+				<button
+					[disabled]="formGroup.invalid || (updatingStudentAnswerTranslation$ | async)"
+					color="primary"
+					mat-flat-button
+					tabindex="4"
+					type="submit"
+				>Update Translation
+				</button>
+				<button
+					[disabled]="questionNode.children.length <= this.studentAnswerNode.index"
+					[routerLink]="['..', this.studentAnswerNode.index + 1]"
+					mat-stroked-button
+					tabindex="5"
+					type="button"
+				>Next
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+<swal
+	#saveChangesSwal
+	(confirm)="updateStudentAnswer(); savingChangesSwal.fire()"
+	[showCancelButton]="true"
+	icon="question"
+	titleText="Do you want to update this translation?"
+></swal>
+<swal
+	#savingChangesSwal
+	[allowOutsideClick]="false"
+	[icon]="(updatingStudentAnswerTranslation$ | async) ? 'info' : 'success'"
+	[showCancelButton]="false"
+	[showCloseButton]="false"
+	[showConfirmButton]="!(updatingStudentAnswerTranslation$ | async)"
+	[titleText]="(updatingStudentAnswerTranslation$ | async) ? 'Saving information...' : 'Student answer updated!'"
+>
+</swal>

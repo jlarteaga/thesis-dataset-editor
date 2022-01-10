@@ -22,7 +22,7 @@ export class MainLayoutComponent implements AfterViewInit, OnDestroy {
 
 	ngAfterViewInit(): void {
 		this.subscriptions.push(
-			this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+			this.observer.observe(['(max-width: 1250px)']).subscribe((res) => {
 				setTimeout(() => {
 					if (res.matches) {
 						this.sidenav.mode = 'over';

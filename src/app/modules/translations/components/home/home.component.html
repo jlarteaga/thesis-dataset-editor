@@ -1,1 +1,15 @@
-<p>TanslationsHome works!</p>
+<div *ngIf="areTranslationNodesLoaded$ | async" class="container">
+	<div class="left-panel">
+		<app-test-explorer>
+		</app-test-explorer>
+	</div>
+	<mat-divider [vertical]="true"></mat-divider>
+	<div class="right-panel">
+		<mat-card class="translation-element mat-elevation-z6">
+			<mat-card-content>
+				<router-outlet></router-outlet>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
+<mat-progress-bar *ngIf="!(areTranslationNodesLoaded$ | async)"></mat-progress-bar>

@@ -1,0 +1,29 @@
+$toggle-button-size: 1.2rem;
+.toggle-button {
+
+	width: $toggle-button-size;
+	height: $toggle-button-size;
+	line-height: $toggle-button-size;
+
+	.mat-icon {
+		width: $toggle-button-size;
+		height: $toggle-button-size;
+		line-height: $toggle-button-size;
+		font-size: $toggle-button-size;
+	}
+
+	.mat-button-ripple {
+		width: inherit;
+		height: inherit;
+		line-height: inherit;
+		font-size: inherit;
+	}
+}
+
+mat-progress-bar {
+	margin-left: 2rem;
+}
+
+.button-active {
+	background-color: rgba(230, 230, 230, 0.3);
+}
