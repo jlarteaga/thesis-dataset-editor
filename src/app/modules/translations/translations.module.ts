@@ -13,6 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { QuestionsModule } from '../questions/questions.module';
+import { SharedModule } from '../shared/shared.module';
+import { StudentAnswersModule } from '../student-answers/student-answers.module';
 import { HomeComponent } from './components/home/home.component';
 import { TestExplorerComponent } from './components/test-explorer/test-explorer.component';
 import { TranslateQuestionComponent } from './components/translate-question/translate-question.component';
@@ -35,6 +37,7 @@ import { TranslationsRoutingModule } from './translations-routing.module';
 		CommonModule,
 		TranslationsRoutingModule,
 		QuestionsModule,
+		StudentAnswersModule,
 		MatTreeModule,
 		MatIconModule,
 		MatButtonModule,
@@ -46,7 +49,8 @@ import { TranslationsRoutingModule } from './translations-routing.module';
 		MatFormFieldModule,
 		MatInputModule,
 		ReactiveFormsModule,
-		SweetAlert2Module
+		SweetAlert2Module,
+		SharedModule
 	]
 })
 export class TranslationsModule {}

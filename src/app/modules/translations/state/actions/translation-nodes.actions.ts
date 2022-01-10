@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { GetQuestionDTO } from '../../../questions/dtos/get-question.dto';
 import { PatchQuestionDto } from '../../../questions/dtos/patch-question.dto';
+import { GetStudentAnswerDTO } from '../../../student-answers/dtos/get-student-answer.dto';
+import { PatchStudentAnswerDTO } from '../../../student-answers/dtos/patch-student-answer.dto';
 import { QuestionTranslationNode, StudentAnswerTranslationNode } from '../translations.state';
 
 enum TranslationNodesAction {
@@ -16,6 +18,8 @@ enum TranslationNodesAction {
 
 	PatchQuestion = '[Translations] Patch question',
 	QuestionPatched = '[Translations] Patched question',
+	PatchStudentAnswer = '[Translations] Patch student answer',
+	StudentAnswerPatched = '[Translations] Patched student answer',
 }
 
 export const loadQuestionTranslationNodes = createAction(
@@ -76,5 +80,21 @@ export const questionPatched = createAction(
 	props<{
 		uuid: string;
 		question: GetQuestionDTO
+	}>()
+);
+
+export const patchStudentAnswer = createAction(
+	TranslationNodesAction.PatchStudentAnswer,
+	props<{
+		uuid: string;
+		patch: PatchStudentAnswerDTO;
+	}>()
+);
+
+export const studentAnswerPatched = createAction(
+	TranslationNodesAction.StudentAnswerPatched,
+	props<{
+		uuid: string;
+		studentAnswer: GetStudentAnswerDTO;
 	}>()
 );

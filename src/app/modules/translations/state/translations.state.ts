@@ -32,11 +32,13 @@ export interface TranslationsState {
 	translationNodesStatus: ResourceStatus;
 	subTranslationNodesStatus: ResourceStatus;
 	updatingQuestionTranslation: boolean;
+	updatingStudentAnswerTranslation: boolean;
 }
 
 export const translationsInitialState: TranslationsState = {
 	translationNodes: [],
 	translationNodesStatus: ResourceStatus.NotLoaded,
 	subTranslationNodesStatus: ResourceStatus.NotLoaded,
-	updatingQuestionTranslation: false
+	updatingQuestionTranslation: false,
+	updatingStudentAnswerTranslation: false
 };

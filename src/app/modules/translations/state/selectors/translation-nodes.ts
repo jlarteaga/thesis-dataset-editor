@@ -45,3 +45,8 @@ export const selectUpdatingQuestionTranslation = createSelector(
 	selectTranslationFeature,
 	(state: TranslationsState) => state.updatingQuestionTranslation
 );
+
+export const selectUpdatingStudentAnswerTranslation = createSelector(
+	selectTranslationFeature,
+	(state: TranslationsState) => state.updatingStudentAnswerTranslation
+);
