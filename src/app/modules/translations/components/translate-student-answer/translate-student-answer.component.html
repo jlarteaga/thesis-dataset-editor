@@ -15,7 +15,7 @@
 	<div class="language-panel">
 		<h2>Spanish</h2>
 		<app-labeled-data [data]="questionNode.element.es?.rawStatement" label="Question:"></app-labeled-data>
-		<button (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
+		<button #sanitize (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
 		<form
 			(ngSubmit)="saveChangesSwal.fire()"
 			[formGroup]="formGroup"
@@ -37,8 +37,8 @@
 					mat-stroked-button
 					tabindex="6"
 					type="button"
-				>Previous
-				</button>
+					(click)="sanitize._elementRef.nativeElement.focus()"
+				>Previous</button>
 				<button
 					[disabled]="formGroup.invalid || (updatingStudentAnswerTranslation$ | async)"
 					color="primary"
@@ -53,8 +53,8 @@
 					mat-stroked-button
 					tabindex="5"
 					type="button"
-				>Next
-				</button>
+					(click)="sanitize._elementRef.nativeElement.focus()"
+				>Next</button>
 			</div>
 		</form>
 	</div>

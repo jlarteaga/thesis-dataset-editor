@@ -12,11 +12,25 @@ export const replaceRRB = (value: string): string =>
 
 export const trim = (value: string): string => value.trim();
 
+export const finalDot = (value: string): string => (value.endsWith('.') ? value : value + '.');
+
+export const firstLetterCapital = (value: string): string => {
+	if (value[0].toUpperCase() === value[0]) {
+		return value;
+	} else {
+		let parsedValue = value.split('');
+		parsedValue[0] = parsedValue[0].toUpperCase();
+		return parsedValue.join('');
+	}
+};
+
 const sanitizationOperations: Array<(value: string) => string> = [
 	removeStopTags,
 	replaceLRB,
 	replaceRRB,
-	trim
+	trim,
+	finalDot,
+	firstLetterCapital
 ];
 
 export const sanitizeText = (value: string): string => {

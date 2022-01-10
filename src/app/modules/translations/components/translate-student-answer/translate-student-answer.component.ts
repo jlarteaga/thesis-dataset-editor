@@ -22,7 +22,6 @@ export class TranslateStudentAnswerComponent implements OnDestroy {
 	subscriptions: Subscription[] = [];
 	questionNode: QuestionTranslationNode | null = null;
 	studentAnswerNode: StudentAnswerTranslationNode | null = null;
-
 	updatingStudentAnswerTranslation$: Observable<boolean>;
 	formGroup: FormGroup;
 

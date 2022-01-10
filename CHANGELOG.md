@@ -10,6 +10,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 ### Changed
+- Changed behavior of SutdentAnswerTranslation and set focus to sanitize button when 'next' or 'previous' buttons are clicked.
+- Improved sanitization.
 
 ### Deprecated
 
