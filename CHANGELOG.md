@@ -9,7 +9,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Added behavior to force login if an unauthorized response is received.
+
 ### Changed
+
+- When textarea is focused, the cursor moves to the first letter (the standard behavior was to move to the end of the text).
 
 ### Deprecated
 
