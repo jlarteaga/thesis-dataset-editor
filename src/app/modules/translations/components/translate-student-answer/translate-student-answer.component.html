@@ -23,11 +23,13 @@
 			<mat-form-field appearance="fill">
 				<mat-label>Question</mat-label>
 				<textarea
+					#ta
 					formControlName="sent"
 					lang="es"
 					matInput
 					spellcheck="true"
 					tabindex="2"
+					(focus)="ta.setSelectionRange(0, null)"
 				></textarea>
 			</mat-form-field>
 			<div class="actions">

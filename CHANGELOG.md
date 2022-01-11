@@ -17,6 +17,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+## [0.1.2]
+
+### Added
+
+- Added behavior to force login if an unauthorized response is received.
+
+### Changed
+
+- When textarea is focused, the cursor moves to the first letter (the standard behavior was to move to the end of the
+  text).
+
 ## [0.1.1]
 
 ### Changed
@@ -35,8 +46,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Added component to translate student answers.
 - Added small button to sanitize some common issues.
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.1...develop
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.2...develop
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.0...0.1.1
+[0.1.2]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.1...0.1.2
+
+[0.1.1]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.0...0.1.1
 
 [0.1.0]: https://github.com/jlarteaga/thesis-dataset-editor/releases/tag/0.1.0
