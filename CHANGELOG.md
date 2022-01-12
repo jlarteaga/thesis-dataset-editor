@@ -17,6 +17,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+## [0.1.3]
+
+### Fixed student-answer translation component showing the rawStatement of the question instead of its sentStatement. 
+
 ## [0.1.2]
 
 ### Added
