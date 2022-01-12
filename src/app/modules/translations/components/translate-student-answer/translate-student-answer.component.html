@@ -14,7 +14,7 @@
 	</div>
 	<div class="language-panel">
 		<h2>Spanish</h2>
-		<app-labeled-data [data]="questionNode.element.es?.rawStatement" label="Question:"></app-labeled-data>
+		<app-labeled-data [data]="questionNode.element.es?.sentStatement" label="Question:"></app-labeled-data>
 		<button #sanitize (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
 		<form
 			(ngSubmit)="saveChangesSwal.fire()"
