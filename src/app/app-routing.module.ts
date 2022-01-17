@@ -21,8 +21,7 @@ const routes: Routes = [
 			},
 			{
 				path: 'questions',
-				redirectTo: '/home'
-				// loadChildren: () => import('./modules/questions/questions.module').then(m => m.QuestionsModule)
+				loadChildren: () => import('./modules/questions/questions.module').then(m => m.QuestionsModule)
 			},
 			{
 				path: 'student-answers',
