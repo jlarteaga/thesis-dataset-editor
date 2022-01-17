@@ -6,14 +6,14 @@
 	</h1>
 	<div class="language-panel">
 		<h2>
-			<a [routerLink]="['/questions', questionNode.element.en?.uuid]">English</a>
+			English <small><a [routerLink]="['/questions', questionNode.element.en?.uuid]">[view]</a></small>
 		</h2>
 		<app-labeled-data [data]="questionNode.element.en?.rawStatement" label="Question:"></app-labeled-data>
 		<app-labeled-data [data]="questionNode.element.en?.answer?.raw" label="Answer:"></app-labeled-data>
 	</div>
 	<div class="language-panel">
 		<h2>
-			<a [routerLink]="['/questions', questionNode.element.es?.uuid]">Spanish</a>
+			Spanish <small><a [routerLink]="['/questions', questionNode.element.es?.uuid]">[view]</a></small>
 		</h2>
 		<button (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
 		<form

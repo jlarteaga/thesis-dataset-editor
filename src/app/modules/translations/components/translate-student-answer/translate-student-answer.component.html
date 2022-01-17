@@ -6,8 +6,6 @@
 		></app-text-status>
 	</h1>
 	<div class="language-panel">
-	</div>
-	<div class="language-panel">
 		<h2>English</h2>
 		<app-labeled-data [data]="questionNode.element.en?.rawStatement" label="Question:"></app-labeled-data>
 		<app-labeled-data [data]="studentAnswerNode.element.en?.text?.raw" label="S-Answer:"></app-labeled-data>
@@ -36,11 +34,12 @@
 				<button
 					[disabled]="this.studentAnswerNode.index === 0"
 					[routerLink]="['..', this.studentAnswerNode.index + -1]"
-					mat-stroked-button
+					mat-icon-button
 					tabindex="6"
 					type="button"
+					aria-label="Previous"
 					(click)="sanitize._elementRef.nativeElement.focus()"
-				>Previous</button>
+				><mat-icon>arrow_back</mat-icon></button>
 				<button
 					[disabled]="formGroup.invalid || (updatingStudentAnswerTranslation$ | async)"
 					color="primary"
@@ -50,13 +49,14 @@
 				>Update Translation
 				</button>
 				<button
-					[disabled]="questionNode.children.length <= this.studentAnswerNode.index"
+					[disabled]="this.studentAnswerNode.index + 1 >= questionNode.children.length"
 					[routerLink]="['..', this.studentAnswerNode.index + 1]"
-					mat-stroked-button
+					mat-icon-button
 					tabindex="5"
 					type="button"
+					aria-label="Next"
 					(click)="sanitize._elementRef.nativeElement.focus()"
-				>Next</button>
+				><mat-icon>arrow_forward</mat-icon></button>
 			</div>
 		</form>
 	</div>
