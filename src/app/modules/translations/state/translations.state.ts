@@ -1,3 +1,4 @@
+import { ResourceStatus } from '../../../state/global.state';
 import { SupportedLanguage } from '../../../utils/global-types';
 import { Question } from '../../questions/models/question';
 import { StudentAnswer } from '../../student-answers/models/student-answer';
@@ -17,12 +18,6 @@ export interface StudentAnswerTranslationNode {
 	index: number;
 	questionLabel: string;
 	element: Partial<Record<SupportedLanguage, StudentAnswer>>;
-}
-
-export enum ResourceStatus {
-	NotLoaded = 'not-loaded',
-	Loading = 'loading',
-	Loaded = 'loaded'
 }
 
 export type TranslationNode = QuestionTranslationNode | StudentAnswerTranslationNode;

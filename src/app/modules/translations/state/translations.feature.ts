@@ -1,14 +1,9 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { ResourceStatus } from '../../../state/global.state';
 import { Question } from '../../questions/models/question';
 import { StudentAnswer } from '../../student-answers/models/student-answer';
 import { TranslationNodesActions } from './actions';
-import {
-	QuestionTranslationNode,
-	ResourceStatus,
-	StudentAnswerTranslationNode,
-	translationsInitialState,
-	TranslationsState
-} from './translations.state';
+import { QuestionTranslationNode, StudentAnswerTranslationNode, translationsInitialState, TranslationsState } from './translations.state';
 
 export const TRANSLATIONS_FEATURE_NAME = 'translations';
 

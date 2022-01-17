@@ -1,33 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, switchMap } from 'rxjs';
-import { TranslationNodesActions } from 'src/app/modules/translations/state/actions';
+import { exhaustMap, map } from 'rxjs';
+import { Question } from '../../models/question';
 import { QuestionsService } from '../../services/questions.service';
+import { ShownQuestionActions } from '../actions';
 
 @Injectable()
 export class QuestionsEffects {
 
-	patchQuestion$ = createEffect(() =>
+	getShownQuestion$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(TranslationNodesActions.patchQuestion),
-			exhaustMap(({ uuid, patch }) =>
-				this.questionsService.updateById(uuid, patch).pipe(
-					switchMap(() =>
-						this.questionsService.getById(uuid).pipe(
-							map((getQuestionDTO) => TranslationNodesActions.questionPatched({
-								uuid: uuid,
-								question: getQuestionDTO
-							}))
-						)
-					)
-				)
-			)
-		)
-	);
+			ofType(ShownQuestionActions.loadShownQuestion, ShownQuestionActions.updateShownQuestion),
+			exhaustMap(({ uuid }) => this.questionsService.getById(uuid)),
+			map(getQuestionDTO => Question.fromDto(getQuestionDTO)),
+			map(question => ShownQuestionActions.setShownQuestion({
+				question
+			}))
+		));
+
+	setShownQuestion$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(ShownQuestionActions.setShownQuestion),
+			map(({ question }) => ShownQuestionActions.shownQuestionLoaded({
+				question
+			}))
+		));
 
 	constructor(
 		private actions$: Actions,
 		private questionsService: QuestionsService
 	) {
 	}
+
 }
