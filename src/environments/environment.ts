@@ -6,6 +6,9 @@ export const environment = {
 	production: false,
 	datasetManager: {
 		url: 'http://localhost:3000'
+	},
+	coordinator: {
+		url: 'http://localhost:3005'
 	}
 };
 

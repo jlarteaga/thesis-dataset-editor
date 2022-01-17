@@ -1,4 +1,4 @@
 <p class="labeled-data">
-	<span class="labeled-data__label">{{label}}</span>
+	<span class="labeled-data__label">{{label + ((label || '').endsWith(':') ? '' : ':')}}&nbsp;</span>
 	<span class="labeled-data__data">{{data}}</span>
 </p>

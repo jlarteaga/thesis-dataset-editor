@@ -1,16 +1,20 @@
 <div *ngIf="questionNode">
 	<h1>Question {{ questionNode.label }}
-		<app-translation-status
+		<app-text-status
 			[status]="questionNode.element.es?.answer?.status" size="small"
-		></app-translation-status>
+		></app-text-status>
 	</h1>
 	<div class="language-panel">
-		<h2>English</h2>
+		<h2>
+			<a [routerLink]="['/questions', questionNode.element.en?.uuid]">English</a>
+		</h2>
 		<app-labeled-data [data]="questionNode.element.en?.rawStatement" label="Question:"></app-labeled-data>
 		<app-labeled-data [data]="questionNode.element.en?.answer?.raw" label="Answer:"></app-labeled-data>
 	</div>
 	<div class="language-panel">
-		<h2>Spanish</h2>
+		<h2>
+			<a [routerLink]="['/questions', questionNode.element.es?.uuid]">Spanish</a>
+		</h2>
 		<button (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
 		<form
 			(ngSubmit)="saveChangesSwal.fire()"

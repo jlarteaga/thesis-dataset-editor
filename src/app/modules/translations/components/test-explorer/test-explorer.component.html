@@ -12,7 +12,7 @@
 			routerLinkActive="button-active"
 			tabindex="-1"
 		>{{node.name}}</a>
-		<app-translation-status [status]="node.status" size="small"></app-translation-status>
+		<app-text-status [status]="node.status" size="small"></app-text-status>
 	</mat-tree-node>
 	<mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding="node.level">
 		<button
@@ -37,7 +37,7 @@
 			routerLinkActive="button-active"
 			tabindex="-1"
 		>{{node.name}}</a>
-		<app-translation-status [status]="node.status" size="small"></app-translation-status>
+		<app-text-status [status]="node.status" size="small"></app-text-status>
 		<mat-progress-bar *ngIf="node.isLoading" color="accent" mode="indeterminate"></mat-progress-bar>
 	</mat-tree-node>
 </mat-tree>

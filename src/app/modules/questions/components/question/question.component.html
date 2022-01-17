@@ -1,0 +1,42 @@
+<mat-spinner
+	*ngIf="!question"
+	diameter="80"
+></mat-spinner>
+
+<div class="question" *ngIf="question">
+	<h1 class="question__title">
+		Question {{question.label}}
+		<small>[{{question.lang}}]</small><br>
+		<app-text-status [status]="question.answer.status"></app-text-status>
+	</h1>
+	<h2>Raw data</h2>
+	<app-labeled-data label="Stmt." [data]="question.rawStatement"></app-labeled-data>
+	<app-labeled-data label="Ans." [data]="question.answer.sent"></app-labeled-data>
+	<h2>Sent data</h2>
+	<app-labeled-data label="Stmt." [data]="question.sentStatement"></app-labeled-data>
+	<app-labeled-data label="Ans." [data]="question.answer.raw"></app-labeled-data>
+	<h2>Processed answer</h2>
+	<p *ngIf="question.lang === 'en'">
+		<span *ngIf="!question.answer.processed">The answer doesn't have processed data.</span>
+		<span *ngIf="question.answer.processed">{{question.answer.processed}}</span>
+	</p>
+	<div *ngIf="question.lang === 'es'">
+		<div *ngIf="question.answer.processingStatus === ProcessingStatus.NotProcessed">
+			<p>
+				The answer has not been processed yet.
+			</p>
+			<button
+				mat-stroked-button color="primary"
+				[disabled]="(sendingProcessingRequest$ | async)"
+				(click)="processAnswer()"
+			>Process answer</button>
+		</div>
+		<p *ngIf="question.answer.processingStatus === ProcessingStatus.Processing">
+			The answer is being processed.
+		</p>
+		<app-freeling-display
+			*ngIf="question.answer.processingStatus === ProcessingStatus.Processed"
+			[xml]="question.answer.processed"
+		></app-freeling-display>
+	</div>
+</div>

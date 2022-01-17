@@ -4,11 +4,11 @@ import { TextStatus } from '../../../student-answers/models/text';
 export type size = 'small' | 'medium' | 'big';
 
 @Component({
-	selector: 'app-translation-status',
-	templateUrl: './translation-status.component.html',
-	styleUrls: ['./translation-status.component.scss']
+	selector: 'app-text-status',
+	templateUrl: './text-status.component.html',
+	styleUrls: ['./text-status.component.scss']
 })
-export class TranslationStatusComponent {
+export class TextStatusComponent {
 
 	defaultSize: size = 'small';
 

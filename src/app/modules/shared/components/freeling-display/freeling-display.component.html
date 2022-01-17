@@ -1,0 +1,34 @@
+<p *ngIf="errorMessage"><{{errorMessage}}></p>
+<div *ngIf="document">
+	<h3>Sentences</h3>
+	<mat-card
+		*ngFor="let sentence of document.sentences"
+		class="sentence"
+	>
+		<h3>Sentence {{sentence.id}}</h3>
+		<mat-divider></mat-divider>
+		<div class="sentence__container">
+			<p class="sentence__tokens">
+				<span
+					*ngFor="let token of sentence.tokens"
+					class="token"
+				>
+					<span class="token__form">{{token.form}}</span>
+					<span class="token__lemma">{{token.lemma}}</span>
+					<span class="token__tag">{{token.tag}}</span>
+					<a
+						class="token__wn"
+						*ngIf="token.wn"
+						href="http://compling.hss.ntu.edu.sg/omw/cgi-bin/wn-grid.cgi?synset={{token.wn}}"
+						target="_blank"
+						rel="noopener noreferrer nofollow"
+					>{{token.wn}}</a>
+				</span>
+			</p>
+			<mat-divider></mat-divider>
+			<div class="sentence__dependencies">
+				<app-graphviz-display [dot]="sentence.dependencies | depNodeToDot"></app-graphviz-display>
+			</div>
+		</div>
+	</mat-card>
+</div>

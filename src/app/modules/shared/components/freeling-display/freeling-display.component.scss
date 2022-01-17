@@ -1,0 +1,53 @@
+.sentence {
+	& + .sentence {
+		margin-top: 1rem;
+	}
+	&__tokens {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+
+		padding: 1rem 0;
+
+		overflow-y: scroll;
+		font-size: 0.9rem;
+		font-family: monospace, sans-serif;
+	}
+	&__dependencies {
+		margin-top: 1.8rem;
+	}
+}
+
+.token {
+
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.8rem;
+	font-size: 1em;
+
+	* + * {
+		margin-top: 2px;
+	}
+
+	&__form {
+		font-weight: bold;
+	}
+
+	&__lemma {
+		font-size: 0.85em;
+		color: #0000DD;
+	}
+
+	&__tag {
+		font-size: 0.9em;
+		font-style: italic;
+		color: #EE0000;
+	}
+
+	&__wn {
+		font-size: 0.9em;
+		font-family: monospace, sans-serif;
+		color: #117711
+	}
+
+}
