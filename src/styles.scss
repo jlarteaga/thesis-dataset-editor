@@ -18,3 +18,9 @@ body {
 .language-panel {
 	padding: 1rem 2rem;
 }
+
+.graph-container {
+	svg {
+		max-width: 100%;
+	}
+}

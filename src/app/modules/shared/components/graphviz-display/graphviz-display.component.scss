@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	justify-content: center;
+	max-width: 100%;
+}
+
+.graph-container {
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 3px;
+	max-width: 100%;
+}

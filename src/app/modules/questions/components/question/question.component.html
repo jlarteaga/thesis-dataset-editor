@@ -34,8 +34,9 @@
 		<p *ngIf="question.answer.processingStatus === ProcessingStatus.Processing">
 			The answer is being processed.
 		</p>
-		<p *ngIf="question.answer.processingStatus === ProcessingStatus.Processed">
-			{{question.answer.processed}}
-		</p>
+		<app-freeling-display
+			*ngIf="question.answer.processingStatus === ProcessingStatus.Processed"
+			[xml]="question.answer.processed"
+		></app-freeling-display>
 	</div>
 </div>
