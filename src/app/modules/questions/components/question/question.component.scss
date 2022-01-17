@@ -2,3 +2,12 @@ mat-spinner {
 	margin-top: 2rem;
 	margin-left: 2rem;
 }
+
+.question {
+	&__content {
+		margin-bottom: 1rem;
+	}
+	&__details {
+		margin-top: 1rem;
+	}
+}

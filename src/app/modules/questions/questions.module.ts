@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -30,7 +31,8 @@ import { questionsFeature } from './state/questions.feature';
 		MatProgressSpinnerModule,
 		SharedModule,
 		MatButtonModule,
-		SweetAlert2Module
+		SweetAlert2Module,
+		MatDividerModule
 	]
 })
 export class QuestionsModule {}
