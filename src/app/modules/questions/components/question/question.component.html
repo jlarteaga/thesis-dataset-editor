@@ -25,7 +25,11 @@
 			<p>
 				The answer has not been processed yet.
 			</p>
-			<button mat-stroked-button color="primary" (click)="processAnswer()">Process answer</button>
+			<button
+				mat-stroked-button color="primary"
+				[disabled]="(sendingProcessingRequest$ | async)"
+				(click)="processAnswer()"
+			>Process answer</button>
 		</div>
 		<p *ngIf="question.answer.processingStatus === ProcessingStatus.Processing">
 			The answer is being processed.

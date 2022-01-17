@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../auth/auth.service';
 import { AuthenticatedService } from './authenticated-service';
@@ -24,12 +24,20 @@ export class CoordinatorService extends AuthenticatedService {
 		super(authService);
 	}
 
-	requestProcessingForText(uuid: string): Observable<OperationResponse> {
-		return this.httpClient.get<OperationResponse>(
-			`${this.coordinatorUrl}/operations/process-text/texts/${uuid}`,
+	requestProcessingForQuestion(uuid: string): Observable<OperationResponse> {
+		return this.httpClient.post<OperationResponse>(
+			`${this.coordinatorUrl}/operations/process-text/questions/${uuid}`,
+			null,
 			{
 				headers: this.headers
 			}
+		).pipe(
+			catchError(error => of(
+				{
+					success: false,
+					message: error.statusText
+				} as OperationResponse)
+			)
 		);
 	}
 }

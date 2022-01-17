@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { interval, Observable, Subscription, tap } from 'rxjs';
 import { ProcessingStatus } from '../../../student-answers/models/text';
 import { Question } from '../../models/question';
 import { ShownQuestionActions } from '../../state/actions';
-import { selectShownQuestion } from '../../state/selectors';
+import { selectSendingTextProcessRequest, selectShownQuestion } from '../../state/selectors';
 
 @Component({
 	selector: 'app-question',
@@ -18,23 +18,29 @@ export class QuestionComponent implements OnDestroy {
 
 	subscriptions: Subscription[] = [];
 	question: Question | null = null;
+	sendingProcessingRequest$: Observable<boolean>;
+	refreshingSubscription: Subscription | null = null;
 
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private store: Store
 	) {
+		this.sendingProcessingRequest$ = store.select(selectSendingTextProcessRequest);
 		this.initializeUuidSubscription();
 		this.initializeQuestionSubscription();
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(subscription => subscription.unsubscribe());
+		this.cleanRefreshingSubscription();
 	}
 
 	processAnswer() {
 		if (this.question && this.question.uuid) {
-			// TODO: Request processing to coordinator
+			this.store.dispatch(ShownQuestionActions.requestTextProcessingForQuestion({
+				uuid: this.question.uuid
+			}));
 		} else {
 			console.warn('Can\'t process answer without an uuid');
 		}
@@ -61,9 +67,44 @@ export class QuestionComponent implements OnDestroy {
 	private initializeQuestionSubscription() {
 		this.subscriptions.push(
 			this.store.select(selectShownQuestion).subscribe(question => {
-				console.log(question);
 				this.question = question;
+				this.updateRefreshingBehavior();
 			})
 		);
+	}
+
+	private updateRefreshingBehavior() {
+		if (!this.question?.answer?.processingStatus) {
+			this.cleanRefreshingSubscription();
+			return;
+		}
+		if (this.question.answer.processingStatus === ProcessingStatus.Processing) {
+			this.initializeRefreshingSubscription();
+		} else {
+			this.cleanRefreshingSubscription();
+		}
+	}
+
+	private cleanRefreshingSubscription() {
+		if (this.refreshingSubscription) {
+			this.refreshingSubscription.unsubscribe();
+			this.refreshingSubscription = null;
+		}
+	}
+
+	private initializeRefreshingSubscription() {
+		if (this.refreshingSubscription) {
+			this.cleanRefreshingSubscription();
+		}
+		this.refreshingSubscription = interval(1500)
+			.pipe(
+				tap(() => {
+					if (this.question?.uuid) {
+						this.store.dispatch(ShownQuestionActions.updateShownQuestion({
+							uuid: this.question.uuid
+						}));
+					}
+				})
+			).subscribe();
 	}
 }

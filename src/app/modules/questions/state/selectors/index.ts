@@ -17,3 +17,8 @@ export const selectShownQuestionStatus: (state: any) => ResourceStatus = createS
 	selectQuestionsState,
 	(state) => state.questionShownStatus
 );
+
+export const selectSendingTextProcessRequest: (state: any) => boolean = createSelector(
+	selectQuestionsState,
+	(state) => state.sendingProcessTextRequest
+);
