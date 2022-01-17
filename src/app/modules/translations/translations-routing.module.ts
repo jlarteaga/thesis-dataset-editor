@@ -7,6 +7,11 @@ import { TranslateStudentAnswerComponent } from './components/translate-student-
 const routes: Routes = [
 	{
 		path: '',
+		pathMatch: 'full',
+		redirectTo: 'questions/1.1'
+	},
+	{
+		path: '',
 		component: HomeComponent,
 		children: [
 			{

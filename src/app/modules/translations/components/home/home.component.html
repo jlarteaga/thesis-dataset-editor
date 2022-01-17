@@ -1,10 +1,12 @@
 <div *ngIf="areTranslationNodesLoaded$ | async" class="container">
 	<div class="left-panel">
+		<h2>Questions</h2>
 		<app-test-explorer>
 		</app-test-explorer>
 	</div>
 	<mat-divider [vertical]="true"></mat-divider>
 	<div class="right-panel">
+		<h1 class="right-panel__title">Translations</h1>
 		<mat-card class="translation-element mat-elevation-z6">
 			<mat-card-content>
 				<router-outlet></router-outlet>
