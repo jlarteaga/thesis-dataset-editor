@@ -6,12 +6,16 @@
 		></app-text-status>
 	</h1>
 	<div class="language-panel">
-		<h2>English</h2>
+		<h2>
+			English <small><a [routerLink]="['/student-answers', studentAnswerNode.element.en?.uuid]">[view]</a></small>
+		</h2>
 		<app-labeled-data [data]="questionNode.element.en?.rawStatement" label="Question:"></app-labeled-data>
 		<app-labeled-data [data]="studentAnswerNode.element.en?.text?.raw" label="S-Answer:"></app-labeled-data>
 	</div>
 	<div class="language-panel">
-		<h2>Spanish</h2>
+		<h2>
+			Spanish <small><a [routerLink]="['/student-answers', studentAnswerNode.element.es?.uuid]">[view]</a></small>
+		</h2>
 		<app-labeled-data [data]="questionNode.element.es?.sentStatement" label="Question:"></app-labeled-data>
 		<button #sanitize (click)="sanitizeEntries()" mat-stroked-button tabindex="1">Sanitize</button>
 		<form
@@ -22,24 +26,26 @@
 				<mat-label>Question</mat-label>
 				<textarea
 					#ta
+					(focus)="ta.setSelectionRange(0, null)"
 					formControlName="sent"
 					lang="es"
 					matInput
 					spellcheck="true"
 					tabindex="2"
-					(focus)="ta.setSelectionRange(0, null)"
 				></textarea>
 			</mat-form-field>
 			<div class="actions">
 				<button
+					(click)="sanitize._elementRef.nativeElement.focus()"
 					[disabled]="this.studentAnswerNode.index === 0"
 					[routerLink]="['..', this.studentAnswerNode.index + -1]"
+					aria-label="Previous"
 					mat-icon-button
 					tabindex="6"
 					type="button"
-					aria-label="Previous"
-					(click)="sanitize._elementRef.nativeElement.focus()"
-				><mat-icon>arrow_back</mat-icon></button>
+				>
+					<mat-icon>arrow_back</mat-icon>
+				</button>
 				<button
 					[disabled]="formGroup.invalid || (updatingStudentAnswerTranslation$ | async)"
 					color="primary"
@@ -49,14 +55,16 @@
 				>Update Translation
 				</button>
 				<button
+					(click)="sanitize._elementRef.nativeElement.focus()"
 					[disabled]="this.studentAnswerNode.index + 1 >= questionNode.children.length"
 					[routerLink]="['..', this.studentAnswerNode.index + 1]"
+					aria-label="Next"
 					mat-icon-button
 					tabindex="5"
 					type="button"
-					aria-label="Next"
-					(click)="sanitize._elementRef.nativeElement.focus()"
-				><mat-icon>arrow_forward</mat-icon></button>
+				>
+					<mat-icon>arrow_forward</mat-icon>
+				</button>
 			</div>
 		</form>
 	</div>
