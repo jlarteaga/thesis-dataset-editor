@@ -19,7 +19,6 @@ import { HomeComponent } from './components/home/home.component';
 import { TestExplorerComponent } from './components/test-explorer/test-explorer.component';
 import { TranslateQuestionComponent } from './components/translate-question/translate-question.component';
 import { TranslateStudentAnswerComponent } from './components/translate-student-answer/translate-student-answer.component';
-import { TranslationStatusComponent } from './components/translation-status/translation-status.component';
 import { QuestionsEffects } from './state/effects/questions.effects';
 import { TranslationNodesEffects } from './state/effects/translation-nodes.effects';
 import { translationsFeature } from './state/translations.feature';
@@ -31,9 +30,9 @@ import { TranslationsRoutingModule } from './translations-routing.module';
 		HomeComponent,
 		TestExplorerComponent,
 		TranslateQuestionComponent,
-		TranslateStudentAnswerComponent,
-		TranslationStatusComponent
+		TranslateStudentAnswerComponent
 	],
+	exports: [],
 	imports: [
 		CommonModule,
 		TranslationsRoutingModule,

@@ -1,8 +1,8 @@
 <div *ngIf="questionNode">
 	<h1>Question {{ questionNode.label }}
-		<app-translation-status
+		<app-text-status
 			[status]="questionNode.element.es?.answer?.status" size="small"
-		></app-translation-status>
+		></app-text-status>
 	</h1>
 	<div class="language-panel">
 		<h2>

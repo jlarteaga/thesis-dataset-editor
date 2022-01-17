@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { QuestionComponent } from './components/question/question.component';
 
@@ -20,7 +22,9 @@ import { questionsFeature } from './state/questions.feature';
 		QuestionsRoutingModule,
 		StoreModule.forFeature(questionsFeature),
 		EffectsModule.forFeature([QuestionsEffects]),
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		SharedModule,
+		MatButtonModule
 	]
 })
 export class QuestionsModule {}
