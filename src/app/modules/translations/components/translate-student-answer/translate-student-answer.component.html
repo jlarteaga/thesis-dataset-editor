@@ -1,9 +1,9 @@
 <div *ngIf="questionNode && studentAnswerNode">
 	<h1>
 		Question {{questionNode.label}} [Student Answer {{studentAnswerNode.index + 1}}]
-		<app-translation-status
+		<app-text-status
 			[status]="studentAnswerNode.element.es?.text?.status"
-		></app-translation-status>
+		></app-text-status>
 	</h1>
 	<div class="language-panel">
 	</div>

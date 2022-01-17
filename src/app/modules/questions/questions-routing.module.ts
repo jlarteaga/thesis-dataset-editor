@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { QuestionComponent } from './components/question/question.component';
 
 const routes: Routes = [
 	{
 		path: '',
-		pathMatch: 'full',
-		component: HomeComponent
+		component: HomeComponent,
+		pathMatch: 'full'
+	},
+	{
+		path: ':uuid',
+		component: QuestionComponent
 	}
 ];
 

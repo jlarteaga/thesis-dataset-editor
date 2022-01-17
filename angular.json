@@ -32,7 +32,12 @@
 						"inlineStyleLanguage": "scss",
 						"assets": [
 							"src/favicon.ico",
-							"src/assets"
+							{
+								"glob": "**/*",
+								"input": "src/assets/",
+								"output":"/assets/",
+								"followSymlinks": true
+							}
 						],
 						"styles": [
 							"src/styles.scss"
@@ -42,7 +47,11 @@
 								"src/styles/"
 							]
 						},
-						"scripts": []
+						"scripts": [],
+						"allowedCommonJsDependencies": [
+							"d3-graphviz",
+							"fast-xml-parser"
+						]
 					},
 					"configurations": {
 						"production": {
