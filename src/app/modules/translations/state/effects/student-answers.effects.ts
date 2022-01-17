@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, map, switchMap } from 'rxjs';
 import { TranslationNodesActions } from 'src/app/modules/translations/state/actions';
-import { StudentAnswersService } from '../../services/student-answers.service';
+import { StudentAnswersService } from '../../../student-answers/services/student-answers.service';
 
 @Injectable()
 export class StudentAnswersEffects {

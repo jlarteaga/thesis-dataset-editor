@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { HomeComponent } from './components/home/home.component';
-import { StudentAnswersEffects } from './state/effects/student-answers.effects';
 
 import { StudentAnswersRoutingModule } from './student-answers-routing.module';
 
@@ -13,7 +12,7 @@ import { StudentAnswersRoutingModule } from './student-answers-routing.module';
 	imports: [
 		CommonModule,
 		StudentAnswersRoutingModule,
-		EffectsModule.forFeature([StudentAnswersEffects])
+		EffectsModule.forFeature([])
 	]
 })
 export class StudentAnswersModule {}
