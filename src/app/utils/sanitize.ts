@@ -14,6 +14,10 @@ export const trim = (value: string): string => value.trim();
 
 export const finalDot = (value: string): string => (value.endsWith('.') ? value : value + '.');
 
+const brRegex = /<br>/g;
+export const replaceBR = (value: string) =>
+	value.replace(brRegex, '\n');
+
 export const firstLetterCapital = (value: string): string => {
 	if (value[0].toUpperCase() === value[0]) {
 		return value;
@@ -28,6 +32,7 @@ const sanitizationOperations: Array<(value: string) => string> = [
 	removeStopTags,
 	replaceLRB,
 	replaceRRB,
+	replaceBR,
 	trim,
 	finalDot,
 	firstLetterCapital
