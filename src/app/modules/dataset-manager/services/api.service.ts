@@ -1,23 +1,22 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../auth/auth.service';
+import { AuthenticatedService } from '../../shared/services/authenticated-service';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class ApiService {
-
-	private headers: HttpHeaders = new HttpHeaders();
+export class ApiService extends AuthenticatedService {
 
 	private datasetManagerUrl: string = environment.datasetManager.url;
 
 	constructor(
-		private httpClient: HttpClient,
-		private authService: AuthService
+		authService: AuthService,
+		private httpClient: HttpClient
 	) {
-		this.setupAuthenticationSubscription();
+		super(authService);
 	}
 
 	get<T>(path: string): Observable<T> {
@@ -37,17 +36,5 @@ export class ApiService {
 				headers: this.headers
 			}
 		);
-	}
-
-	private setupAuthenticationSubscription() {
-		this.authService.user.pipe(
-			map(user => user?.token || null)
-		).subscribe(token => {
-			if (token) {
-				this.headers = this.headers.set('Authorization', `Bearer ${token}`);
-			} else {
-				this.headers = this.headers.delete('Authorization');
-			}
-		});
 	}
 }
