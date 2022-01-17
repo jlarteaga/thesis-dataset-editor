@@ -17,6 +17,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+## [0.2.1]
+
+### Changed
+
+- Improved some visual details in all views.
+
 ## [0.2.0]
 
 ### Added
@@ -57,7 +63,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Added component to translate student answers.
 - Added small button to sanitize some common issues.
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.0...develop
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.1...develop
+
+[0.2.1]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.0...0.2.1
 
 [0.2.0]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.1.2...0.2.0
 
