@@ -18,6 +18,16 @@ export const selectShownQuestionStatus: (state: any) => ResourceStatus = createS
 	(state) => state.questionShownStatus
 );
 
+export const selectShownQuestions: (state: any) => (Question[] | null) = createSelector(
+	selectQuestionsState,
+	(state) => state.questionsShown
+);
+
+export const selectShownQuestionsStatus: (state: any) => ResourceStatus = createSelector(
+	selectQuestionsState,
+	(state) => state.questionsShownStatus
+);
+
 export const selectSendingTextProcessRequest: (state: any) => boolean = createSelector(
 	selectQuestionsState,
 	(state) => state.sendingProcessTextRequest
