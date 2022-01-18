@@ -9,6 +9,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Added single student answer view.
+
 ### Changed
 
 - Small navigation fixes
