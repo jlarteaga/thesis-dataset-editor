@@ -16,6 +16,11 @@ export enum ProcessingStatus {
 	Processed = 'processed'
 }
 
+export enum AvailableLanguage {
+	Es = 'es',
+	En = 'en'
+}
+
 export class Text {
 	uuid: string;
 	lang: SupportedLanguage;

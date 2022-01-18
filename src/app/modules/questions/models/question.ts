@@ -1,4 +1,4 @@
-import { Text } from '../../student-answers/models/text';
+import { AvailableLanguage, Text } from '../../student-answers/models/text';
 import { GetAllQuestionDTO } from '../dtos/get-all-question.dto';
 
 export const LABEL_REGEX = /^(\d+)\.(\d+)/;
@@ -8,7 +8,7 @@ export class Question {
 	uuid: string;
 	rawStatement: string;
 	sentStatement: string;
-	lang: string;
+	lang: AvailableLanguage;
 	label: string;
 	answer: Text;
 

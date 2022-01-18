@@ -1,1 +1,61 @@
-<p>StudentAnswersHome works!</p>
+<mat-spinner
+	*ngIf="!availableTests"
+	diameter="80"
+></mat-spinner>
+<div *ngIf="availableTests">
+	<h1>Student Answers</h1>
+	<p>
+		<mat-form-field>
+			<mat-label>Choose a language</mat-label>
+			<mat-select [(ngModel)]="lang">
+				<mat-option [value]="AvailableLanguage.En">English</mat-option>
+				<mat-option [value]="AvailableLanguage.Es">Spanish</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field>
+			<mat-label>Choose a test</mat-label>
+			<mat-select [(ngModel)]="test">
+				<mat-option
+					*ngFor="let parsedTest of availableTests[lang]"
+					[value]="parsedTest"
+				>Test {{parsedTest.id}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field>
+			<mat-label>Choose a question</mat-label>
+			<mat-select
+				[(ngModel)]="question"
+				[disabled]="!test"
+			>
+				<mat-option
+					(click)="showStudentAnswersForQuestion(parsedQuestion.question.uuid)"
+					*ngFor="let parsedQuestion of (test ? test.questions : [])"
+					[value]="parsedQuestion"
+				>Question {{parsedQuestion.question.label}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</p>
+	<div>
+		<mat-spinner
+			*ngIf="shownStudentAnswersStatus === ResourceStatus.Loading"
+			diameter="80"
+		></mat-spinner>
+		<mat-list *ngIf="shownStudentAnswers">
+			<mat-action-list>
+				<button
+					*ngFor="let studentAnswer of shownStudentAnswers"
+					[routerLink]="['/student-answers', studentAnswer.uuid]"
+					mat-list-item
+				>
+					Answer of student {{studentAnswer.student + 1}}
+					&nbsp;
+					<app-text-status [status]="studentAnswer.text.status"></app-text-status>
+				</button>
+			</mat-action-list>
+		</mat-list>
+	</div>
+</div>

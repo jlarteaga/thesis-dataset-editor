@@ -1,10 +1,10 @@
-import { Text } from '../../student-answers/models/text';
+import { AvailableLanguage, Text } from '../../student-answers/models/text';
 
 export interface GetBaseQuestionDTO {
 	uuid: string;
 	rawStatement: string;
 	sentStatement: string;
-	lang: string;
+	lang: AvailableLanguage;
 	label: string;
 	answer: Text;
 }

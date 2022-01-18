@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, map } from 'rxjs';
 import { Question } from '../../models/question';
 import { QuestionsService } from '../../services/questions.service';
-import { ShownQuestionActions } from '../actions';
+import { ShownQuestionActions, ShownQuestionsActions } from '../actions';
 
 @Injectable()
 export class QuestionsEffects {
@@ -23,6 +23,24 @@ export class QuestionsEffects {
 			ofType(ShownQuestionActions.setShownQuestion),
 			map(({ question }) => ShownQuestionActions.shownQuestionLoaded({
 				question
+			}))
+		));
+
+	getShownQuestions$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(ShownQuestionsActions.loadShownQuestions, ShownQuestionsActions.updateShownQuestions),
+			exhaustMap(() => this.questionsService.getAll()),
+			map(getQuestionDTOs => getQuestionDTOs.map(getQuestionDTO => Question.fromDTO(getQuestionDTO))),
+			map(questions => ShownQuestionsActions.setShownQuestions({
+				questions
+			}))
+		));
+
+	setShownQuestions$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(ShownQuestionsActions.setShownQuestions),
+			map(({ questions }) => ShownQuestionsActions.shownQuestionsLoaded({
+				questions
 			}))
 		));
 

@@ -1,1 +1,41 @@
-<p>QuestionsHome works!</p>
+<mat-spinner
+	*ngIf="shownQuestionsStatus !== ResourceStatus.Loaded"
+	diameter="80"
+></mat-spinner>
+<div *ngIf="availableTests">
+	<h1>Questions</h1>
+	<div>
+		<mat-form-field appearance="outline">
+			<mat-label>Choose a language</mat-label>
+			<mat-select [(ngModel)]="lang">
+				<mat-option [value]="AvailableLanguage.En">English</mat-option>
+				<mat-option [value]="AvailableLanguage.Es">Spanish</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<div *ngIf="lang" class="available-tests-container">
+		<mat-accordion class="available-tests" multi="true">
+			<mat-expansion-panel
+				*ngFor="let test of availableTests[lang]"
+			>
+				<mat-expansion-panel-header>
+					<mat-panel-title>Test {{test.id}}</mat-panel-title>
+					<mat-panel-description>{{test.questions.length}} questions</mat-panel-description>
+				</mat-expansion-panel-header>
+				<ng-template matExpansionPanelContent>
+					<mat-action-list>
+						<button
+							*ngFor="let parsedQuestion of test.questions"
+							[routerLink]="['/questions', parsedQuestion.question.uuid]"
+							mat-list-item
+						>
+							Question {{parsedQuestion.question.label}}
+							&nbsp;
+							<app-text-status [status]="parsedQuestion.question.answer.status"></app-text-status>
+						</button>
+					</mat-action-list>
+				</ng-template>
+			</mat-expansion-panel>
+		</mat-accordion>
+	</div>
+</div>
