@@ -12,10 +12,10 @@
 		</h1>
 		<h2>Raw data</h2>
 		<app-labeled-data label="Stmt." [data]="question.rawStatement"></app-labeled-data>
-		<app-labeled-data label="Ans." [data]="question.answer.sent"></app-labeled-data>
+		<app-labeled-data label="Ans." [data]="question.answer.raw"></app-labeled-data>
 		<h2>Sent data</h2>
 		<app-labeled-data label="Stmt." [data]="question.sentStatement"></app-labeled-data>
-		<app-labeled-data label="Ans." [data]="question.answer.raw"></app-labeled-data>
+		<app-labeled-data label="Ans." [data]="question.answer.sent"></app-labeled-data>
 		<a [routerLink]="['/translations', 'questions', question.label]">View Translation</a>
 	</div>
 
@@ -32,7 +32,8 @@
 					The answer has not been processed yet.
 				</p>
 				<button
-					mat-stroked-button color="primary"
+					mat-stroked-button
+					color="primary"
 					[disabled]="(sendingProcessingRequest$ | async)"
 					(click)="processAnswer()"
 				>Process answer

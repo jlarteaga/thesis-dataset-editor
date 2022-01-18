@@ -17,3 +17,8 @@ export const selectShownStudentAnswerStatus: (state: any) => ResourceStatus = cr
 	selectStudentAnswersState,
 	(state) => state.studentAnswerShownStatus
 );
+
+export const selectSendingTextProcessRequest: (state: any) => boolean = createSelector(
+	selectStudentAnswersState,
+	(state) => state.sendingProcessTextRequest
+)

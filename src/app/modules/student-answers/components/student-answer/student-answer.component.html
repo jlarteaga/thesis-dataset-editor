@@ -1,1 +1,58 @@
-<p *ngIf="studentAnswer">{{studentAnswer.text.raw}}</p>
+<mat-spinner
+	*ngIf="!studentAnswer"
+	diameter="80"
+></mat-spinner>
+
+<div class="student-answer" *ngIf="studentAnswer">
+	<div class="student-answer__content">
+		<h1 class="student-answer__title">
+			Q-{{studentAnswer.question.label}}: Student answer {{studentAnswer.student + 1}}
+			<small>[{{studentAnswer.text.lang}}]</small><br>
+			<app-text-status [status]="studentAnswer.text.status"></app-text-status>
+		</h1>
+		<h2>Raw data</h2>
+		<app-labeled-data label="Stmt." [data]="studentAnswer.question.rawStatement"></app-labeled-data>
+		<app-labeled-data label="Ans." [data]="studentAnswer.text.sent"></app-labeled-data>
+		<h2>Sent data</h2>
+		<app-labeled-data label="Stmt." [data]="studentAnswer.question.sentStatement"></app-labeled-data>
+		<app-labeled-data label="Ans." [data]="studentAnswer.text.raw"></app-labeled-data>
+		<a
+			[routerLink]="[
+				'/translations',
+				'questions',
+				studentAnswer.question.label,
+				'student-answers',
+				studentAnswer.student
+			]"
+		>View Translation</a>
+	</div>
+	<mat-divider></mat-divider>
+	<div class="student-answer__details">
+		<h2>Processed answer</h2>
+		<p *ngIf="studentAnswer.text.lang === 'en'">
+			<span *ngIf="!studentAnswer.text.processed">The answer doesn't have processed data.</span>
+			<span *ngIf="studentAnswer.text.processed">{{studentAnswer.text.processed}}</span>
+		</p>
+		<div *ngIf="studentAnswer.text.lang === 'es'">
+			<div *ngIf="studentAnswer.text.processingStatus === ProcessingStatus.NotProcessed">
+				<p>
+					The answer has not been processed yet.
+				</p>
+				<button
+					mat-stroked-button
+					color="primary"
+					[disabled]="(sendingProcessingRequest$ | async)"
+					(click)="processStudentAnswer()"
+				>Process answer
+				</button>
+			</div>
+			<p *ngIf="studentAnswer.text.processingStatus === ProcessingStatus.Processing">
+				The answer is being processed.
+			</p>
+			<app-freeling-display
+				*ngIf="studentAnswer.text.processingStatus === ProcessingStatus.Processed"
+				[xml]="studentAnswer.text.processed"
+			></app-freeling-display>
+		</div>
+	</div>
+</div>
