@@ -9,9 +9,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Added restrictions to request a text processing when the text has not been reviewed.
-- Added navigation from a student answer to its question.
-
 ### Changed
 
 ### Deprecated
@@ -19,6 +16,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Removed
 
 ### Fixed
+
+## [1.0.1]
+
+### Added
+
+- Added restrictions to request a text processing when the text has not been reviewed.
+- Added navigation from a student answer to its question.
 
 ## [1.0.0]
 
@@ -88,7 +92,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Added component to translate student answers.
 - Added small button to sanitize some common issues.
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.0...develop
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.1...develop
+
+[1.0.1]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.0...1.0.1
 
 [1.0.0]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.2...1.0.0
 
