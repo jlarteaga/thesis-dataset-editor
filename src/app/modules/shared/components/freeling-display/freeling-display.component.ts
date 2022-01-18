@@ -25,7 +25,7 @@ export class FreelingDisplayComponent {
 			const parsedElement = this.parser.parse(xmlString || '');
 			try {
 				this.document = parseDocumentFromObject(parsedElement);
-			} catch(e) {
+			} catch (e) {
 				console.error(e);
 				this.errorMessage = INVALID_FORMAT_MSG;
 			}

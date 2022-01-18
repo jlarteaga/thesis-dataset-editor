@@ -14,7 +14,7 @@ import { DepNodeToDotPipe } from './pipes/dep-node-to-dot.pipe';
 		TextStatusComponent,
 		FreelingDisplayComponent,
 		GraphvizDisplayComponent,
-  DepNodeToDotPipe
+		DepNodeToDotPipe
 	],
 	exports: [
 		LabeledDataComponent,
