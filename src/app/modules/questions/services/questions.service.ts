@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiService } from '../../dataset-manager/services/api.service';
 import { GetAllQuestionDTO } from '../dtos/get-all-question.dto';
 import { GetQuestionDTO } from '../dtos/get-question.dto';
-import { PatchQuestionDto } from '../dtos/patch-question.dto';
+import { PatchQuestionDTO } from '../dtos/patch-question.dto';
 
 export interface PatchResponseDTO {
 	message: string;
@@ -23,8 +23,8 @@ export class QuestionsService {
 		return this.apiService.get<GetAllQuestionDTO[]>('/questions');
 	}
 
-	updateById(uuid: string, patch: PatchQuestionDto): Observable<PatchResponseDTO> {
-		return this.apiService.patch<PatchQuestionDto, PatchResponseDTO>(`/questions/${uuid}`, patch);
+	updateById(uuid: string, patch: PatchQuestionDTO): Observable<PatchResponseDTO> {
+		return this.apiService.patch<PatchQuestionDTO, PatchResponseDTO>(`/questions/${uuid}`, patch);
 	}
 
 	getById(uuid: string): Observable<GetQuestionDTO> {

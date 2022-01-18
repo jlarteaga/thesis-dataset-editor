@@ -1,5 +1,5 @@
 import { GetBaseQuestionDTO } from '../../questions/dtos/get-base-question.dto';
-import { GetAllStudentAnswerDTO } from '../dtos/get-all-student-answer.dto';
+import { GetStudentAnswerSummarizedDTO } from '../dtos/get-student-answer-summarized.dto';
 import { Text } from './text';
 
 export class StudentAnswer {
@@ -14,7 +14,7 @@ export class StudentAnswer {
 	text: Text;
 	student: number;
 
-	static fromDto(
+	static fromDTO(
 		{
 			uuid,
 			student,
@@ -22,7 +22,7 @@ export class StudentAnswer {
 			question,
 			grades,
 			grade
-		}: GetAllStudentAnswerDTO
+		}: GetStudentAnswerSummarizedDTO
 	): StudentAnswer {
 		return new StudentAnswer({
 			uuid,

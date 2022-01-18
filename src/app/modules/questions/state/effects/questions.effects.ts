@@ -12,7 +12,7 @@ export class QuestionsEffects {
 		this.actions$.pipe(
 			ofType(ShownQuestionActions.loadShownQuestion, ShownQuestionActions.updateShownQuestion),
 			exhaustMap(({ uuid }) => this.questionsService.getById(uuid)),
-			map(getQuestionDTO => Question.fromDto(getQuestionDTO)),
+			map(getQuestionDTO => Question.fromDTO(getQuestionDTO)),
 			map(question => ShownQuestionActions.setShownQuestion({
 				question
 			}))

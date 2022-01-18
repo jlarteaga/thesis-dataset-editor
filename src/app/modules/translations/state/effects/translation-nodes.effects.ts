@@ -4,7 +4,7 @@ import { exhaustMap, map, Observable, zip } from 'rxjs';
 import { SupportedLanguage } from '../../../../utils/global-types';
 import { Question } from '../../../questions/models/question';
 import { QuestionsService } from '../../../questions/services/questions.service';
-import { GetAllStudentAnswerDTO } from '../../../student-answers/dtos/get-all-student-answer.dto';
+import { GetStudentAnswerSummarizedDTO } from '../../../student-answers/dtos/get-student-answer-summarized.dto';
 import { StudentAnswer } from '../../../student-answers/models/student-answer';
 import { StudentAnswersService } from '../../../student-answers/services/student-answers.service';
 import { TranslationNodesActions } from '../actions';
@@ -68,7 +68,7 @@ export class TranslationNodesEffects {
 
 	private retrieveQuestionTranslationNodes(): Observable<QuestionTranslationNode[]> {
 		return this.questionsService.getAll().pipe(
-			map(getAllQuestionDTOs => getAllQuestionDTOs.map(getAllQuestionDTO => Question.fromDto(getAllQuestionDTO))),
+			map(getAllQuestionDTOs => getAllQuestionDTOs.map(getAllQuestionDTO => Question.fromDTO(getAllQuestionDTO))),
 			map(questions => {
 				const questionsMap = new Map<string, Partial<Record<SupportedLanguage, Question>>>();
 				questions.forEach(question => {
@@ -104,19 +104,19 @@ export class TranslationNodesEffects {
 			this.studentAnswersService.getAllByQuestionUuid(parentNode.element?.es?.uuid),
 			this.studentAnswersService.getAllByQuestionUuid(parentNode.element?.en?.uuid)
 		).pipe(
-			map(([esStudentAnswerDtos, enStudentAnswerDtos]) => [...esStudentAnswerDtos, ...enStudentAnswerDtos]),
-			map((studentAnswerDtos: GetAllStudentAnswerDTO[]) => {
+			map(([esStudentAnswerDTOs, enStudentAnswerDTOs]) => [...esStudentAnswerDTOs, ...enStudentAnswerDTOs]),
+			map((studentAnswerDTOs: GetStudentAnswerSummarizedDTO[]) => {
 				const children: Array<StudentAnswerTranslationNode> = [];
-				studentAnswerDtos.forEach(studentAnswerDto => {
-					if (!children[studentAnswerDto.student]) {
-						children[studentAnswerDto.student] = {
+				studentAnswerDTOs.forEach(studentAnswerDTO => {
+					if (!children[studentAnswerDTO.student]) {
+						children[studentAnswerDTO.student] = {
 							type: 'student-answer',
 							questionLabel: parentNode.label,
-							index: studentAnswerDto.student,
+							index: studentAnswerDTO.student,
 							element: {}
 						};
 					}
-					children[studentAnswerDto.student].element[studentAnswerDto.text.lang] = StudentAnswer.fromDto(studentAnswerDto);
+					children[studentAnswerDTO.student].element[studentAnswerDTO.text.lang] = StudentAnswer.fromDTO(studentAnswerDTO);
 				});
 				return children;
 			})

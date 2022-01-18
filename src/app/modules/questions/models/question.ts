@@ -12,7 +12,7 @@ export class Question {
 	label: string;
 	answer: Text;
 
-	static fromDto(
+	static fromDTO(
 		{
 			uuid,
 			lang,

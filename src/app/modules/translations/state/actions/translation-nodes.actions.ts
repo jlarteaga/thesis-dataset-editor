@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { GetQuestionDTO } from '../../../questions/dtos/get-question.dto';
-import { PatchQuestionDto } from '../../../questions/dtos/patch-question.dto';
-import { GetStudentAnswerDTO } from '../../../student-answers/dtos/get-student-answer.dto';
+import { PatchQuestionDTO } from '../../../questions/dtos/patch-question.dto';
+import { GetStudentAnswerDetailedDTO } from '../../../student-answers/dtos/get-student-answer-detailed.dto';
 import { PatchStudentAnswerDTO } from '../../../student-answers/dtos/patch-student-answer.dto';
 import { QuestionTranslationNode, StudentAnswerTranslationNode } from '../translations.state';
 
@@ -71,7 +71,7 @@ export const patchQuestion = createAction(
 	TranslationNodesAction.PatchQuestion,
 	props<{
 		uuid: string;
-		patch: PatchQuestionDto;
+		patch: PatchQuestionDTO;
 	}>()
 );
 
@@ -95,6 +95,6 @@ export const studentAnswerPatched = createAction(
 	TranslationNodesAction.StudentAnswerPatched,
 	props<{
 		uuid: string;
-		studentAnswer: GetStudentAnswerDTO;
+		studentAnswer: GetStudentAnswerDetailedDTO;
 	}>()
 );
