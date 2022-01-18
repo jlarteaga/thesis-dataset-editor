@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, map } from 'rxjs';
 import { StudentAnswer } from '../../models/student-answer';
 import { StudentAnswersService } from '../../services/student-answers.service';
-import { ShownStudentAnswerActions } from '../actions';
+import { ShownStudentAnswerActions, ShownStudentAnswersActions } from '../actions';
 
 @Injectable()
 export class StudentAnswersEffects {
@@ -13,8 +13,7 @@ export class StudentAnswersEffects {
 			ofType(ShownStudentAnswerActions.loadShownStudentAnswer, ShownStudentAnswerActions.updateShownStudentAnswer),
 			exhaustMap(({ uuid }) => this.studentAnswersService.getById(uuid)),
 			map(getStudentAnswerDTO => {
-				console.log(getStudentAnswerDTO);
-				return StudentAnswer.fromDetailedDTO(getStudentAnswerDTO)
+				return StudentAnswer.fromDetailedDTO(getStudentAnswerDTO);
 			}),
 			map(studentAnswer => ShownStudentAnswerActions.setShownStudentAnswer({
 				studentAnswer
@@ -26,6 +25,31 @@ export class StudentAnswersEffects {
 			ofType(ShownStudentAnswerActions.setShownStudentAnswer),
 			map(({ studentAnswer }) => ShownStudentAnswerActions.shownStudentAnswerLoaded({
 				studentAnswer
+			}))
+		));
+
+	getShownStudents$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(
+				ShownStudentAnswersActions.loadShownStudentAnswersByQuestion,
+				ShownStudentAnswersActions.updateShownStudentAnswersByQuestion
+			),
+			exhaustMap(({ uuid }) => this.studentAnswersService.getAllByQuestionUuid(uuid)),
+			map(getStudentAnswerDTOs =>
+				getStudentAnswerDTOs.map(getStudentAnswerDTO =>
+					StudentAnswer.fromSummarizedDTO(getStudentAnswerDTO)
+				)
+			),
+			map(studentAnswers => ShownStudentAnswersActions.setShownStudentAnswers({
+				studentAnswers
+			}))
+		));
+
+	setShownStudentAnswers$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(ShownStudentAnswersActions.setShownStudentAnswers),
+			map(({ studentAnswers }) => ShownStudentAnswersActions.shownStudentAnswersLoaded({
+				studentAnswers
 			}))
 		));
 

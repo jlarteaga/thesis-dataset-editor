@@ -10,6 +10,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - Question's home view.
+- Student Answer's home view.
 
 ### Changed
 

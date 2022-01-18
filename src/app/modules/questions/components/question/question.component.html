@@ -28,7 +28,9 @@
 			<span *ngIf="question.answer.processed">{{question.answer.processed}}</span>
 		</p>
 		<div *ngIf="question.lang === 'es'">
-			<div *ngIf="question.answer.processingStatus === ProcessingStatus.NotProcessed">
+			<div
+				*ngIf="!question.answer.processingStatus || question.answer.processingStatus === ProcessingStatus.NotProcessed"
+			>
 				<p>
 					The answer has not been processed yet.
 				</p>
