@@ -3,7 +3,7 @@
 	diameter="80"
 ></mat-spinner>
 
-<div class="question" *ngIf="question">
+<div *ngIf="question" class="question">
 	<div class="question__content">
 		<h1 class="question__title">
 			Question {{question.label}}
@@ -11,11 +11,11 @@
 			<app-text-status [status]="question.answer.status"></app-text-status>
 		</h1>
 		<h2>Raw data</h2>
-		<app-labeled-data label="Stmt." [data]="question.rawStatement"></app-labeled-data>
-		<app-labeled-data label="Ans." [data]="question.answer.sent"></app-labeled-data>
+		<app-labeled-data [data]="question.rawStatement" label="Stmt."></app-labeled-data>
+		<app-labeled-data [data]="question.answer.raw" label="Ans."></app-labeled-data>
 		<h2>Sent data</h2>
-		<app-labeled-data label="Stmt." [data]="question.sentStatement"></app-labeled-data>
-		<app-labeled-data label="Ans." [data]="question.answer.raw"></app-labeled-data>
+		<app-labeled-data [data]="question.sentStatement" label="Stmt."></app-labeled-data>
+		<app-labeled-data [data]="question.answer.sent" label="Ans."></app-labeled-data>
 		<a [routerLink]="['/translations', 'questions', question.label]">View Translation</a>
 	</div>
 
@@ -32,9 +32,10 @@
 					The answer has not been processed yet.
 				</p>
 				<button
-					mat-stroked-button color="primary"
-					[disabled]="(sendingProcessingRequest$ | async)"
 					(click)="processAnswer()"
+					[disabled]="(sendingProcessingRequest$ | async)"
+					color="primary"
+					mat-stroked-button
 				>Process answer
 				</button>
 			</div>

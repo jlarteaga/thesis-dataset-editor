@@ -24,24 +24,24 @@
 				<mat-label>Question</mat-label>
 				<textarea
 					#ta1
+					(focus)="ta1.setSelectionRange(0, null)"
 					formControlName="sentStatement"
 					lang="es"
 					matInput
 					spellcheck="true"
 					tabindex="2"
-					(focus)="ta1.setSelectionRange(0, null)"
 				></textarea>
 			</mat-form-field>
 			<mat-form-field appearance="fill">
 				<mat-label>Answer</mat-label>
 				<textarea
 					#ta2
+					(focus)="ta2.setSelectionRange(0, null)"
 					formControlName="sentAnswer"
 					lang="es"
 					matInput
 					spellcheck="true"
 					tabindex="3"
-					(focus)="ta2.setSelectionRange(0, null)"
 				></textarea>
 			</mat-form-field>
 			<div class="actions">

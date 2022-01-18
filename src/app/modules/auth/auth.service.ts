@@ -27,6 +27,19 @@ export class AuthService {
 	) {
 	}
 
+	private static handleError(errorRes: HttpErrorResponse) {
+		let errorMessage = 'An unknown error occurred!';
+		if (!errorRes.error || !errorRes.error.statusCode) {
+			return throwError(errorMessage);
+		}
+		switch (errorRes.error.statusCode) {
+			case 401:
+				errorMessage = 'Wrong credentials';
+				break;
+		}
+		return throwError(errorMessage);
+	}
+
 	login(email: string, password: string) {
 		return this.http.post<AuthResponse>(
 			`${environment.datasetManager.url}/auth/login`,
@@ -99,18 +112,5 @@ export class AuthService {
 		this.user.next(user);
 		this.autoLogout(expiresIn);
 		localStorage.setItem('userData', JSON.stringify(user));
-	}
-
-	private static handleError(errorRes: HttpErrorResponse) {
-		let errorMessage = 'An unknown error occurred!';
-		if (!errorRes.error || !errorRes.error.statusCode) {
-			return throwError(errorMessage);
-		}
-		switch (errorRes.error.statusCode) {
-			case 401:
-				errorMessage = 'Wrong credentials';
-				break;
-		}
-		return throwError(errorMessage);
 	}
 }

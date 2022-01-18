@@ -1,7 +1,7 @@
 import { SupportedLanguage } from '../../../utils/global-types';
 import { TextStatus } from '../../student-answers/models/text';
 
-export interface PatchQuestionDto {
+export interface PatchQuestionDTO {
 	raw?: string;
 	sent?: string;
 	processed?: string;

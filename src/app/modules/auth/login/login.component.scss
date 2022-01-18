@@ -22,8 +22,9 @@
 	}
 
 	&__error-message {
-		color: red;
 		min-height: 1em;
+		color: red;
+
 		&:empty::before {
 			content: "\200b";
 		}

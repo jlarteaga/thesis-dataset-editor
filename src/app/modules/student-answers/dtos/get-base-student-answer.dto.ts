@@ -1,7 +1,8 @@
-import { GetBaseQuestionDTO } from '../../questions/dtos/get-base-question.dto';
-import { Text } from '../models/text';
+import { GetQuestionDTO } from '../../questions/dtos/get-question.dto';
+import { GetTextBaseDTO } from '../../texts/dtos/get-text-base.dto';
+import { ProcessingStatus } from '../models/text';
 
-export interface GetBaseStudentAnswerDto {
+export interface GetBaseStudentAnswerDTO<T extends GetTextBaseDTO> {
 	uuid: string;
 	grade: number;
 	grades: {
@@ -9,6 +10,7 @@ export interface GetBaseStudentAnswerDto {
 		other: number;
 	};
 	student: number;
-	question: GetBaseQuestionDTO;
-	text: Text;
+	question: GetQuestionDTO;
+	text: T;
+	similarityMatricesStatus: ProcessingStatus;
 }

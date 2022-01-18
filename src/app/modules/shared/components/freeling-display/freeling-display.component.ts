@@ -18,14 +18,14 @@ export class FreelingDisplayComponent {
 	private parser: XMLParser;
 
 	@Input()
-	set xml(xmlString: string | undefined) {
+	set xml(xmlString: string | undefined | null) {
 		this.errorMessage = null;
 		this.document = null;
 		if (xmlString) {
 			const parsedElement = this.parser.parse(xmlString || '');
 			try {
 				this.document = parseDocumentFromObject(parsedElement);
-			} catch(e) {
+			} catch (e) {
 				console.error(e);
 				this.errorMessage = INVALID_FORMAT_MSG;
 			}

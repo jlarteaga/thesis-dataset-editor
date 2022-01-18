@@ -1,0 +1,20 @@
+mat-spinner {
+	margin-top: 2rem;
+	margin-left: 2rem;
+}
+
+.student-answer {
+	&__content {
+		margin-bottom: 1rem;
+	}
+
+	&__details {
+		margin-top: 1rem;
+	}
+	&__processed {
+		margin-bottom: 1.5rem;
+	}
+	&__similarity-matrices {
+		margin-top: 1rem;
+	}
+}
