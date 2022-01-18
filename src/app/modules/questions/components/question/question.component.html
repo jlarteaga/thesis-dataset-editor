@@ -33,12 +33,16 @@
 			>
 				<p>
 					The answer has not been processed yet.
+					<span *ngIf="question.answer.status !== TextStatus.CleanedTranslated">
+						To start processing it, this translation must be reviewed and confirmed.
+					</span>
 				</p>
 				<button
 					(click)="processAnswer()"
 					[disabled]="(sendingProcessingRequest$ | async)"
 					color="primary"
 					mat-stroked-button
+					*ngIf="question.answer.status === TextStatus.CleanedTranslated"
 				>Process answer
 				</button>
 			</div>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { interval, Observable, Subscription, tap } from 'rxjs';
 import { StudentAnswer } from '../../models/student-answer';
-import { ProcessingStatus } from '../../models/text';
+import { ProcessingStatus, TextStatus } from '../../models/text';
 import { ShownStudentAnswerActions } from '../../state/actions';
 import { selectSendingTextProcessRequest, selectShownStudentAnswer } from '../../state/selectors';
 
@@ -14,6 +14,7 @@ import { selectSendingTextProcessRequest, selectShownStudentAnswer } from '../..
 })
 export class StudentAnswerComponent {
 
+	readonly TextStatus = TextStatus;
 	readonly ProcessingStatus = ProcessingStatus;
 
 	subscriptions: Subscription[] = [];

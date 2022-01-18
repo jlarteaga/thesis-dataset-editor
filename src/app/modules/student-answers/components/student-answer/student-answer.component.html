@@ -24,7 +24,7 @@
 				'student-answers',
 				studentAnswer.student
 			]"
-		>View Translation</a>
+		>Edit Translation</a>
 	</div>
 	<mat-divider></mat-divider>
 	<div class="student-answer__details">
@@ -40,12 +40,16 @@
 				>
 					<p>
 						The answer has not been processed yet.
+						<span *ngIf="studentAnswer.text.status !== TextStatus.CleanedTranslated">
+							To start processing it, this translation must be reviewed and confirmed.
+						</span>
 					</p>
 					<button
 						(click)="processStudentAnswer()"
 						[disabled]="(sendingProcessingRequest$ | async)"
 						color="primary"
 						mat-stroked-button
+						*ngIf="studentAnswer.text.status === TextStatus.CleanedTranslated"
 					>Process answer
 					</button>
 				</div>

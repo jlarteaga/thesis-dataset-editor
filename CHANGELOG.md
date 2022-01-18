@@ -9,6 +9,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Added restrictions to request a text processing when the text has not been reviewed.
+
 ### Changed
 
 ### Deprecated

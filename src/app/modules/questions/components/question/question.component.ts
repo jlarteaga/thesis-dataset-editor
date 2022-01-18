@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { interval, Observable, Subscription, tap } from 'rxjs';
-import { ProcessingStatus } from '../../../student-answers/models/text';
+import { ProcessingStatus, TextStatus } from '../../../student-answers/models/text';
 import { Question } from '../../models/question';
 import { ShownQuestionActions } from '../../state/actions';
 import { selectSendingTextProcessRequest, selectShownQuestion } from '../../state/selectors';
@@ -14,6 +14,7 @@ import { selectSendingTextProcessRequest, selectShownQuestion } from '../../stat
 })
 export class QuestionComponent implements OnDestroy {
 
+	readonly TextStatus = TextStatus;
 	readonly ProcessingStatus = ProcessingStatus;
 
 	subscriptions: Subscription[] = [];
