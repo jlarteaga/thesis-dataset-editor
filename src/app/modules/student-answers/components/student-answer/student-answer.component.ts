@@ -79,7 +79,10 @@ export class StudentAnswerComponent {
 			this.cleanRefreshingSubscription();
 			return;
 		}
-		if (this.studentAnswer.text.processingStatus === ProcessingStatus.Processing) {
+		if (
+			this.studentAnswer.text.processingStatus === ProcessingStatus.Processing ||
+			this.studentAnswer.similarityMatricesStatus !== ProcessingStatus.Processed
+		) {
 			this.initializeRefreshingSubscription();
 		} else {
 			this.cleanRefreshingSubscription();

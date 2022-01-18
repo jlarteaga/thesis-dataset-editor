@@ -116,7 +116,7 @@ export class TranslationNodesEffects {
 							element: {}
 						};
 					}
-					children[studentAnswerDTO.student].element[studentAnswerDTO.text.lang] = StudentAnswer.fromDTO(studentAnswerDTO);
+					children[studentAnswerDTO.student].element[studentAnswerDTO.text.lang] = StudentAnswer.fromSummarizedDTO(studentAnswerDTO);
 				});
 				return children;
 			})

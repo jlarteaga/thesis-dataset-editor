@@ -12,7 +12,10 @@ export class StudentAnswersEffects {
 		this.actions$.pipe(
 			ofType(ShownStudentAnswerActions.loadShownStudentAnswer, ShownStudentAnswerActions.updateShownStudentAnswer),
 			exhaustMap(({ uuid }) => this.studentAnswersService.getById(uuid)),
-			map(getStudentAnswerDTO => StudentAnswer.fromDTO(getStudentAnswerDTO)),
+			map(getStudentAnswerDTO => {
+				console.log(getStudentAnswerDTO);
+				return StudentAnswer.fromDetailedDTO(getStudentAnswerDTO)
+			}),
 			map(studentAnswer => ShownStudentAnswerActions.setShownStudentAnswer({
 				studentAnswer
 			}))

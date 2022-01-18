@@ -18,7 +18,7 @@ export class FreelingDisplayComponent {
 	private parser: XMLParser;
 
 	@Input()
-	set xml(xmlString: string | undefined) {
+	set xml(xmlString: string | undefined | null) {
 		this.errorMessage = null;
 		this.document = null;
 		if (xmlString) {

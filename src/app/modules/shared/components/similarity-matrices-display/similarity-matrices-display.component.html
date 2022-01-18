@@ -1,0 +1,44 @@
+<p *ngIf="errorMessage"><{{errorMessage}}></p>
+<div *ngIf="data">
+	<mat-tab-group>
+		<mat-tab
+			*ngFor="let algorithm of relatednessAlgorithms"
+			[label]="relatednessAlgorithmNames.get(algorithm) || ''"
+		>
+			<table
+				class="similarity-matrix"
+				*ngIf="data[algorithm]"
+			>
+				<thead>
+					<th>Teacher\Student</th>
+					<th *ngFor="let synset of data.synsets2">
+						<a
+							href="http://compling.hss.ntu.edu.sg/omw/cgi-bin/wn-grid.cgi?synset={{synset}}"
+							rel="noopener noreferrer nofollow"
+							target="_blank"
+						>{{synset}}</a>
+					</th>
+				</thead>
+				<tr *ngFor="let teacherSynset of data.synsets1; index as teacherIdx">
+					<th>
+						<a
+							href="http://compling.hss.ntu.edu.sg/omw/cgi-bin/wn-grid.cgi?synset={{teacherSynset}}"
+							rel="noopener noreferrer nofollow"
+							target="_blank"
+						>{{teacherSynset}}</a>
+					</th>
+					<td *ngFor="let synset of data.synsets2; index as studentIdx">
+						{{data[algorithm][teacherIdx][studentIdx] | number:'1.1-4'}}
+					</td>
+				</tr>
+			</table>
+			<div class="algorithm__equation">
+				<img
+					src="assets/relatedness-algorithms/{{relatednessAlgorithmImages.get(algorithm)}}.png"
+					alt=""
+					loading="lazy"
+				>
+			</div>
+		</mat-tab>
+	</mat-tab-group>
+</div>
