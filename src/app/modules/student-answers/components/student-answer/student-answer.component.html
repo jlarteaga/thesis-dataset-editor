@@ -16,15 +16,20 @@
 		<h2>Sent data</h2>
 		<app-labeled-data [data]="studentAnswer.question.sentStatement" label="Stmt."></app-labeled-data>
 		<app-labeled-data [data]="studentAnswer.text.sent" label="Ans."></app-labeled-data>
-		<a
-			[routerLink]="[
+		<p>
+			<a
+				[routerLink]="[
 				'/translations',
 				'questions',
 				studentAnswer.question.label,
 				'student-answers',
 				studentAnswer.student
 			]"
-		>View Translation</a>
+			>Edit Translation</a>
+		</p>
+		<p>
+			<a [routerLink]="['/questions',studentAnswer.question.uuid]">View question</a>
+		</p>
 	</div>
 	<mat-divider></mat-divider>
 	<div class="student-answer__details">
@@ -40,12 +45,16 @@
 				>
 					<p>
 						The answer has not been processed yet.
+						<span *ngIf="studentAnswer.text.status !== TextStatus.CleanedTranslated">
+							To start processing it, this translation must be reviewed and confirmed.
+						</span>
 					</p>
 					<button
 						(click)="processStudentAnswer()"
 						[disabled]="(sendingProcessingRequest$ | async)"
 						color="primary"
 						mat-stroked-button
+						*ngIf="studentAnswer.text.status === TextStatus.CleanedTranslated"
 					>Process answer
 					</button>
 				</div>
