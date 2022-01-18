@@ -19,11 +19,11 @@
 		#sidenav
 		class="mat-elevation-z2"
 		mode="side"
-		fixedInViewport="true"
 		opened
 	>
 		<a
 			(click)="processSidenavClick()"
+			[routerLinkActiveOptions]="{ exact: true }"
 			class="menu-button"
 			mat-button
 			routerLink="/home"
@@ -34,17 +34,16 @@
 		<mat-divider></mat-divider>
 		<a
 			(click)="processSidenavClick()"
-			routerLink="/questions"
 			class="menu-button"
 			mat-button
+			routerLink="/questions"
 			routerLinkActive="menu-button--active"
 		>
 			<span>Questions</span>
 		</a>
 		<a
 			(click)="processSidenavClick()"
-			[disabled]="true"
-			[routerLink]="null"
+			routerLink="/student-answers"
 			class="menu-button"
 			mat-button
 			routerLinkActive="menu-button--active"

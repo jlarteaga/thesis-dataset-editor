@@ -40,4 +40,21 @@ export class CoordinatorService extends AuthenticatedService {
 			)
 		);
 	}
+
+	requestProcessingForStudentAnswer(uuid: string): Observable<OperationResponse> {
+		return this.httpClient.post<OperationResponse>(
+			`${this.coordinatorUrl}/operations/process-text/student-answers/${uuid}`,
+			null,
+			{
+				headers: this.headers
+			}
+		).pipe(
+			catchError(error => of(
+				{
+					success: false,
+					message: error.statusText
+				} as OperationResponse
+			))
+		);
+	}
 }

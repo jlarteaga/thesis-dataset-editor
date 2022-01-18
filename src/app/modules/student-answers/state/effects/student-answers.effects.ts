@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, switchMap } from 'rxjs';
-import { TranslationNodesActions } from 'src/app/modules/translations/state/actions';
+import { exhaustMap, map } from 'rxjs';
+import { StudentAnswer } from '../../models/student-answer';
 import { StudentAnswersService } from '../../services/student-answers.service';
+import { ShownStudentAnswerActions } from '../actions';
 
 @Injectable()
 export class StudentAnswersEffects {
 
-	patchStudentAnswer$ = createEffect(() =>
+	getShownStudent$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(TranslationNodesActions.patchStudentAnswer),
-			exhaustMap(({ uuid, patch }) =>
-				this.studentAnswersService.updateById(uuid, patch).pipe(
-					switchMap(() =>
-						this.studentAnswersService.getById(uuid).pipe(
-							map((getStudentAnswerDTO) => TranslationNodesActions.studentAnswerPatched({
-								uuid: uuid,
-								studentAnswer: getStudentAnswerDTO
-							}))
-						)
-					)
-				)
-			)
-		)
-	);
+			ofType(ShownStudentAnswerActions.loadShownStudentAnswer, ShownStudentAnswerActions.updateShownStudentAnswer),
+			exhaustMap(({ uuid }) => this.studentAnswersService.getById(uuid)),
+			map(getStudentAnswerDTO => {
+				console.log(getStudentAnswerDTO);
+				return StudentAnswer.fromDetailedDTO(getStudentAnswerDTO)
+			}),
+			map(studentAnswer => ShownStudentAnswerActions.setShownStudentAnswer({
+				studentAnswer
+			}))
+		));
+
+	setShownStudentAnswer$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(ShownStudentAnswerActions.setShownStudentAnswer),
+			map(({ studentAnswer }) => ShownStudentAnswerActions.shownStudentAnswerLoaded({
+				studentAnswer
+			}))
+		));
 
 	constructor(
 		private actions$: Actions,

@@ -84,7 +84,7 @@ export const translationsFeature = createFeature({
 			const translationNodesCopy: QuestionTranslationNode[] = translationNodes.slice();
 			const index = translationNodesCopy.findIndex(node => node.label === question.label);
 			if (index > -1) {
-				const parsedQuestion = Question.fromDto(question);
+				const parsedQuestion = Question.fromDTO(question);
 				const translationNode = translationNodesCopy[index];
 				translationNodesCopy.splice(index, 1, {
 					...translationNode,
@@ -110,7 +110,7 @@ export const translationsFeature = createFeature({
 			const translationNodesCopy: QuestionTranslationNode[] = translationNodes.slice();
 			const index = translationNodesCopy.findIndex(node => node.label === studentAnswer.question.label);
 			if (index > -1) {
-				const parsedStudentAnswer = StudentAnswer.fromDto(studentAnswer);
+				const parsedStudentAnswer = StudentAnswer.fromSummarizedDTO(studentAnswer);
 				const translationNode = translationNodesCopy[index];
 				const children = translationNode.children.slice();
 				const studentAnswerNode = children[parsedStudentAnswer.student];
