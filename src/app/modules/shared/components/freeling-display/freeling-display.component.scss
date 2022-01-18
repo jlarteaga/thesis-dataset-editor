@@ -1,7 +1,4 @@
 .sentence {
-	& + .sentence {
-		margin-top: 1rem;
-	}
 
 	&__tokens {
 		display: flex;

@@ -14,6 +14,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Replaced with MatExpansionPanels the rendering elements of sentences in freeling display component.
+
 ### Deprecated
 
 ### Removed
