@@ -4,19 +4,20 @@
 ></mat-spinner>
 
 <div *ngIf="question" class="question">
+
+	<h1 class="question__title">
+		Question {{question.label}}
+		<small>[{{question.lang}}]</small><br>
+		<app-text-status [status]="question.answer.status"></app-text-status>
+	</h1>
 	<div class="question__content">
-		<h1 class="question__title">
-			Question {{question.label}}
-			<small>[{{question.lang}}]</small><br>
-			<app-text-status [status]="question.answer.status"></app-text-status>
-		</h1>
 		<h2>Raw data</h2>
 		<app-labeled-data [data]="question.rawStatement" label="Stmt."></app-labeled-data>
 		<app-labeled-data [data]="question.answer.raw" label="Ans."></app-labeled-data>
 		<h2>Sent data</h2>
 		<app-labeled-data [data]="question.sentStatement" label="Stmt."></app-labeled-data>
 		<app-labeled-data [data]="question.answer.sent" label="Ans."></app-labeled-data>
-		<a [routerLink]="['/translations', 'questions', question.label]">View Translation</a>
+		<a [routerLink]="['/translations', 'questions', question.label]">Edit Translation</a>
 	</div>
 
 	<mat-divider></mat-divider>
@@ -27,7 +28,9 @@
 			<span *ngIf="question.answer.processed">{{question.answer.processed}}</span>
 		</p>
 		<div *ngIf="question.lang === 'es'">
-			<div *ngIf="question.answer.processingStatus === ProcessingStatus.NotProcessed">
+			<div
+				*ngIf="!question.answer.processingStatus || question.answer.processingStatus === ProcessingStatus.NotProcessed"
+			>
 				<p>
 					The answer has not been processed yet.
 				</p>

@@ -1,7 +1,7 @@
 import { on } from '@ngrx/store';
 import { ResourceStatus } from '../../../../state/global.state';
 import { ProcessingStatus } from '../../../student-answers/models/text';
-import { ShownQuestionActions } from '../actions';
+import { ShownQuestionActions, ShownQuestionsActions } from '../actions';
 import { QuestionsState } from '../questions.state';
 
 export default [
@@ -26,6 +26,29 @@ export default [
 			...state,
 			questionShown: question,
 			questionShownStatus: ResourceStatus.Loaded
+		})
+	),
+	on<QuestionsState, [typeof ShownQuestionsActions.loadShownQuestions]>(
+		ShownQuestionsActions.loadShownQuestions,
+		(state): QuestionsState => ({
+			...state,
+			questionsShown: null,
+			questionsShownStatus: ResourceStatus.Loading
+		})
+	),
+	on<QuestionsState, [typeof ShownQuestionsActions.updateShownQuestions]>(
+		ShownQuestionsActions.updateShownQuestions,
+		(state): QuestionsState => ({
+			...state,
+			questionsShownStatus: ResourceStatus.Loading
+		})
+	),
+	on<QuestionsState, [typeof ShownQuestionsActions.setShownQuestions]>(
+		ShownQuestionsActions.setShownQuestions,
+		(state, { questions }): QuestionsState => ({
+			...state,
+			questionsShown: questions,
+			questionsShownStatus: ResourceStatus.Loaded
 		})
 	),
 	on<QuestionsState, [typeof ShownQuestionActions.requestTextProcessingForQuestion]>(

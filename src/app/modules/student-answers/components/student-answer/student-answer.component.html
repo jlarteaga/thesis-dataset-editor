@@ -35,7 +35,9 @@
 				<span *ngIf="studentAnswer.text.processed">{{studentAnswer.text.processed}}</span>
 			</p>
 			<div *ngIf="studentAnswer.text.lang === 'es'">
-				<div *ngIf="studentAnswer.text.processingStatus === ProcessingStatus.NotProcessed">
+				<div
+					*ngIf="!studentAnswer.text.processingStatus || studentAnswer.text.processingStatus === ProcessingStatus.NotProcessed"
+				>
 					<p>
 						The answer has not been processed yet.
 					</p>

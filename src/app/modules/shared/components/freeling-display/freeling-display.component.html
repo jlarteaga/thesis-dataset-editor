@@ -1,14 +1,17 @@
 <p *ngIf="errorMessage"><{{errorMessage}}></p>
 <div *ngIf="document">
 	<h3>Sentences</h3>
-	<mat-card
-		*ngFor="let sentence of document.sentences"
-		class="sentence"
-	>
-		<h3>Sentence {{sentence.id}}</h3>
-		<mat-divider></mat-divider>
-		<div class="sentence__container">
-			<p class="sentence__tokens">
+	<mat-accordion multi="true">
+		<mat-expansion-panel
+			*ngFor="let sentence of document.sentences"
+			class="sentence"
+		>
+			<mat-expansion-panel-header>
+				<mat-panel-title>Sentence {{sentence.id}}</mat-panel-title>
+			</mat-expansion-panel-header>
+			<ng-template matExpansionPanelContent>
+				<div class="sentence__container">
+					<p class="sentence__tokens">
 				<span
 					*ngFor="let token of sentence.tokens"
 					class="token"
@@ -24,11 +27,13 @@
 						target="_blank"
 					>{{token.wn}}</a>
 				</span>
-			</p>
-			<mat-divider></mat-divider>
-			<div class="sentence__dependencies">
-				<app-graphviz-display [dot]="sentence.dependencies | depNodeToDot"></app-graphviz-display>
-			</div>
-		</div>
-	</mat-card>
+					</p>
+					<mat-divider></mat-divider>
+					<div class="sentence__dependencies">
+						<app-graphviz-display [dot]="sentence.dependencies | depNodeToDot"></app-graphviz-display>
+					</div>
+				</div>
+			</ng-template>
+		</mat-expansion-panel>
+	</mat-accordion>
 </div>
