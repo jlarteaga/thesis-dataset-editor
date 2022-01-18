@@ -10,26 +10,46 @@
 			<small>[{{studentAnswer.text.lang}}]</small><br>
 			<app-text-status [status]="studentAnswer.text.status"></app-text-status>
 		</h1>
-		<h2>Raw data</h2>
-		<app-labeled-data [data]="studentAnswer.question.rawStatement" label="Stmt."></app-labeled-data>
-		<app-labeled-data [data]="studentAnswer.text.raw" label="Ans."></app-labeled-data>
-		<h2>Sent data</h2>
-		<app-labeled-data [data]="studentAnswer.question.sentStatement" label="Stmt."></app-labeled-data>
-		<app-labeled-data [data]="studentAnswer.text.sent" label="Ans."></app-labeled-data>
-		<p>
+		<mat-accordion multi="true">
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title>Raw data</mat-panel-title>
+				</mat-expansion-panel-header>
+				<app-labeled-data [data]="studentAnswer.question.rawStatement" label="Stmt."></app-labeled-data>
+				<app-labeled-data [data]="studentAnswer.text.raw" label="Ans."></app-labeled-data>
+			</mat-expansion-panel>
+			<mat-expansion-panel expanded="true">
+				<mat-expansion-panel-header>
+					<mat-panel-title>Sent data</mat-panel-title>
+				</mat-expansion-panel-header>
+				<app-labeled-data [data]="studentAnswer.question.sentStatement" label="Stmt."></app-labeled-data>
+				<app-labeled-data [data]="studentAnswer.text.sent" label="Ans."></app-labeled-data>
+			</mat-expansion-panel>
+			<mat-expansion-panel expanded="true">
+				<mat-expansion-panel-header>
+					<mat-panel-title>Grades</mat-panel-title>
+				</mat-expansion-panel-header>
+				<app-labeled-data [data]="studentAnswer.grades.me" label="TCH-1"></app-labeled-data>
+				<app-labeled-data [data]="studentAnswer.grades.other" label="TCH-2"></app-labeled-data>
+				<app-labeled-data [data]="studentAnswer.grade" label="Avg"></app-labeled-data>
+			</mat-expansion-panel>
+		</mat-accordion>
+		<div class="student-answer__actions">
 			<a
 				[routerLink]="[
-				'/translations',
-				'questions',
-				studentAnswer.question.label,
-				'student-answers',
-				studentAnswer.student
-			]"
+					'/translations',
+					'questions',
+					studentAnswer.question.label,
+					'student-answers',
+					studentAnswer.student
+				]"
+				mat-stroked-button
 			>Edit Translation</a>
-		</p>
-		<p>
-			<a [routerLink]="['/questions',studentAnswer.question.uuid]">View question</a>
-		</p>
+			<a
+				[routerLink]="['/questions',studentAnswer.question.uuid]"
+				mat-stroked-button
+			>View question</a>
+		</div>
 	</div>
 	<mat-divider></mat-divider>
 	<div class="student-answer__details">

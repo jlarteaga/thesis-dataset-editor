@@ -17,6 +17,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+## [1.0.2]
+
+### Changed
+
+- Replaced default divs by mat-expansion-panels.
+
 ## [1.0.1]
 
 ### Added
@@ -92,8 +98,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Added component to translate student answers.
 - Added small button to sanitize some common issues.
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.1...develop
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.2...develop
 
+[1.0.2]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.0...1.0.1
 
 [1.0.0]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.2...1.0.0
