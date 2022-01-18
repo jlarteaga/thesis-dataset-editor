@@ -11,7 +11,7 @@ export class LabeledDataComponent {
 	label?: string = '';
 
 	@Input()
-	data?: string = '';
+	data?: string | number = '';
 
 	constructor() {
 	}

@@ -17,4 +17,10 @@ mat-spinner {
 	&__similarity-matrices {
 		margin-top: 1rem;
 	}
+	&__actions {
+		margin-top: 1rem;
+		*+* {
+			margin-left: 1rem;
+		}
+	}
 }

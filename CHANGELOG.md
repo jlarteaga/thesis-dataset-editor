@@ -11,6 +11,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Replaced default divs by mat-expansion-panels.
+
 ### Deprecated
 
 ### Removed
