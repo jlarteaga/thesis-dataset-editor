@@ -9,18 +9,24 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Question's home view.
-- Student Answer's home view.
-
 ### Changed
-
-- Replaced with MatExpansionPanels the rendering elements of sentences in freeling display component.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+## [1.0.0]
+
+### Added
+
+- Question's home view.
+- Student Answer's home view.
+
+### Changed
+
+- Replaced with MatExpansionPanels the rendering elements of sentences in freeling display component.
 
 ## [0.2.2]
 
@@ -79,7 +85,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Added component to translate student answers.
 - Added small button to sanitize some common issues.
 
-[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.2...develop
+[Unreleased]: https://github.com/jlarteaga/thesis-dataset-editor/compare/1.0.0...develop
+
+[1.0.0]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.2...1.0.0
 
 [0.2.2]: https://github.com/jlarteaga/thesis-dataset-editor/compare/0.2.1...0.2.2
 
